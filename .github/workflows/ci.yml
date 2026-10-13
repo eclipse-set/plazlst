@@ -1,0 +1,49 @@
+# This workflow will build the main PlaZ-LST schema and publish it to GitHub Packages
+name: Build PlaZ-LST
+
+on: 
+  repository_dispatch:
+  pull_request:
+  push:
+    tags:
+      - 'v**'
+    branches:
+      - 'release/**'
+      - 'main'
+    paths-ignore:
+      - DEPENDENCIES
+      - README.md
+      - LICENSE
+      - BUILD_INSTRUCTIONS.md
+      - CONTRIBUTING.md
+      - NOTICE.md
+      - SECURITY.md
+
+# Enable concurrency to avoid multiple builds at the same time
+concurrency: 
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Java
+        uses: eclipse-set/build/.github/actions/setup-java@main
+      
+      - name: Build project
+        run: mvn -T1.5C -B clean verify
+
+      - name: Publish project
+        run: mvn deploy -B -DaltDeploymentRepository=set-github::https://maven.pkg.github.com/${{ github.repository }}
+
+      - name: Trigger Build SET
+        if: github.ref == 'refs/heads/main' && github.repository_owner == 'eclipse-set'
+        uses: peter-evans/repository-dispatch@ff45666b9427631e3450c54a1bcbee4d9ff4d7c0 # v3.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: eclipse-set/set
+          event-type: "Rebuild with model update ${{ github.run_number }}"
