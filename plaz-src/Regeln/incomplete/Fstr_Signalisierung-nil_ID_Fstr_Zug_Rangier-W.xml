@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="warning" flag="incomplete" planpro:bezug="relevante ID_Fstr_Zug_Rangier nil"
+    context="Fstr_Signalisierung[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:detect-nil(ID_Fstr_Zug_Rangier)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>
