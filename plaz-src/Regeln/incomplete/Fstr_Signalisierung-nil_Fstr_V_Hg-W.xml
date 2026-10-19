@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="warning" flag="incomplete" planpro:bezug="relevantes Fstr_V_Hg nil"
+    context="Fstr_Signalisierung[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:detect-nil(key('Fstr_Fahrweg', 
+    key('Fstr_Zug_Rangier', ID_Fstr_Zug_Rangier/Wert, parent::*)/ID_Fstr_Fahrweg/Wert, parent::*)/Fstr_V_Hg)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

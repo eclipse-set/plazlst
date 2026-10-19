@@ -1,0 +1,8 @@
+target/
+bin/
+resources-bin/
+.project
+.settings
+org.eclipse.set.feature.plaz.schema/res/
+org.eclipse.set.feature.plaz.schema/res-tmp/
+org.eclipse.set.feature.plaz.schema.feature/rootdir/
