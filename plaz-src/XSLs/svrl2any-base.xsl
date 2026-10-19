@@ -32,9 +32,9 @@
     <xsl:param name="tool-stamp" as="xs:string">PlanPro-Werkzeugkoffer, Version 0.0.0</xsl:param>
     <xsl:param name="planpro-dateiname" as="xs:string">unbekannt.ppxml</xsl:param>
     <xsl:param name="md5" as="xs:string">Angabe nicht verfügbar</xsl:param>
+    <xsl:param name="logo-path" as="xs:string">Pictures/DB_InfraGo_logo_red_black_100px_rgb.svg</xsl:param>
     
     <xsl:variable name="plaz-titel" as="xs:string">Feststellungsbericht PlaZ LST</xsl:variable>
-    <xsl:variable name="logo-path" as="xs:string">Pictures/DB_InfraGo_logo_red_black_100px_rgb.svg</xsl:variable>
 
     <xsl:variable name="strukt-svrl">
         <xsl:apply-templates mode="restructure"/>
@@ -408,16 +408,25 @@
          '28'   s1 "s2/s3 (s4 s5)"
          '29'   s1 "s2 (s3s4s5)"
 		 '30'   s1 "s2 s3 (s4/s5)"
+		 '31'   s1 "s2 (s3)" s4 "s5"
          
          '40'   s1 "s2, s3 s4, s5 s6"
          '41'   s1 "s2 s3/s4 [s5] (s6)"
+         '42'   s1 "s2 s3 s4", s5 "s6"
+         '43'   s1 "s2 s3 s4 / s5 s6"
+         '44'   s1 "s2", s3 "s4", s5 "s6"
          
          '50'   s1 "s2 (s3 s4 s5, s6 s7)"
          '51'   s1 "s2 - s3 (s4 s5, s6 s7)"
          '52'   s1 "s2 - s3 s4, s5 (s6, s7)"
          '53'   s1 "s2 - s3 s4, s5 (s6, s7)..."
          '54'   s1 "s2 s3, s4 s5, s6 s7"
-
+         '55'   s1 "s2 - s3 (s4 s5, s6 s7)..."
+         '56'   s1 "s2, s3 s4, s5 s6, s7"
+         '57'   s1 "s2", s3 s4, s5 s6, s7
+         '58'   s1 "s2" s3 "s4" s5 "s6" (s7)
+         '59'   s1 "s2" s3 "s4" (s5, s6, s7)
+         '5A'   s1 "s2" s3 s4 "s5" s6 (s7)         
         -->
         
         <xsl:choose>
@@ -602,6 +611,19 @@
                         </xsl:apply-templates>
                         <xsl:text>&#8220;</xsl:text>
                     </xsl:when>
+                    <xsl:when test="$aufbau = '1A'">
+                        <xsl:text>&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
+                    </xsl:when>
                     <xsl:when test="$aufbau = '20'">
                         <xsl:text> </xsl:text>
                         <xsl:apply-templates mode="missing-or-content" select="node()[1]">
@@ -780,6 +802,24 @@
                         </xsl:apply-templates>
                         <xsl:text>)&#8220;</xsl:text>
                     </xsl:when>
+                    <xsl:when test="$aufbau = '31'">
+                        <xsl:text> (</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>)&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
+                    </xsl:when>
                     <xsl:when test="$aufbau = '40'">
                         <xsl:text>, </xsl:text>
                         <xsl:apply-templates mode="missing-or-content" select="node()[1]">
@@ -800,7 +840,8 @@
                         <xsl:apply-templates mode="missing-or-content" select="node()[1]">
                             <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
                             <xsl:with-param name="markup" select="$markup"/>
-                        </xsl:apply-templates>&#8220;
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
                     </xsl:when>
                     <xsl:when test="$aufbau = '41'">
                         <xsl:text> </xsl:text>
@@ -824,6 +865,75 @@
                             <xsl:with-param name="markup" select="$markup"/>
                         </xsl:apply-templates>
                         <xsl:text>)&#8220;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '42'">
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '43'">
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> / </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '44'">
+                        <xsl:text>&#8220;, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
                     </xsl:when>
                     <xsl:when test="$aufbau = '50'">
                         <xsl:text> (</xsl:text>
@@ -964,6 +1074,173 @@
                             <xsl:with-param name="markup" select="$markup"/>
                         </xsl:apply-templates>
                         <xsl:text>&#8220;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '55'">
+                        <xsl:text> - </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> (</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s7"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>)...&#8220;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '56'">
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s7"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220;</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '57'">
+                        <xsl:text>&#8220;, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s7"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '58'">
+                        <xsl:text>&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220; (</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s7"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>)</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '59'">
+                        <xsl:text>&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220; (</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>, </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s7"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>)</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="$aufbau = '5A'">
+                        <xsl:text>&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s3"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s4"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> &#8222;</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s5"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>&#8220; </xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s6"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text> (</xsl:text>
+                        <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                            <xsl:with-param name="inhalt" tunnel="yes" select="$s7"/>
+                            <xsl:with-param name="markup" select="$markup"/>
+                        </xsl:apply-templates>
+                        <xsl:text>)</xsl:text>
                     </xsl:when>
                 </xsl:choose>
             </xsl:when>

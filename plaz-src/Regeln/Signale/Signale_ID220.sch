@@ -18,7 +18,7 @@
 		</planpro:test>
 		<planpro:output>Signal_Signalbegriff</planpro:output>
 	</iso:p>
-	<iso:rule role="error" context="Signal_Signalbegriff[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]/Signal_Signalbegriff_Allg[Geschaltet/Wert='true']">
-		<iso:assert diagnostics="guid typ bereich aufbau s1 s2 s3 s4 s5 s6 s7" test="Anschaltdauer">Für den geschalteten Signalbegriff wurde keine Anschaltdauer angegeben.</iso:assert>
+	<iso:rule role="error" context="Signal_Signalbegriff[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Signal_Signalbegriff_Allg/Geschaltet/Wert = 'true']">
+		<iso:assert diagnostics="guid typ bereich aufbau s1 s2 s3 s4 s5 s6 s7" test="Signal_Signalbegriff_Allg/Anschaltdauer">Für den geschalteten Signalbegriff wurde keine Anschaltdauer angegeben.</iso:assert>
 	</iso:rule>
 </iso:pattern>

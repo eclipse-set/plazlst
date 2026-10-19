@@ -1,9 +1,6 @@
 --- Pictures folder ---
 © Deutsche Bahn AG · Stand: 23.10.2015 (Version 1.1)
 
---- font folder ---
-© Deutsche Bahn AG
-
 --- Schematron processing ---
 iso_dsdl_include - LICENSE-schematron.txt (MIT license)
 iso_abstract_expand - LICENSE-schematron.txt (MIT license)

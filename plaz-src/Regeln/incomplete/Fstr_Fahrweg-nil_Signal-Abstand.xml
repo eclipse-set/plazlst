@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron"  xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="relevanter Abstand (im Signal) nil"
+    context="Fstr_Fahrweg
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [fx:detect-nil(key('Signal', $Signal-Referenz/Wert, /*)[1]
+       /Punkt_Objekt_TOP_Kante[Wirkrichtung/Wert = $Wirkrichtung]
+          [ID_TOP_Kante/Wert = current()/Bereich_Objekt_Teilbereich/ID_TOP_Kante/Wert][1]/Abstand)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

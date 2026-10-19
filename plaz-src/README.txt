@@ -11,24 +11,25 @@ Schematron-Validierung (SVRL aus PlanPro-XML)
 * Verzeichnis 'Regeln':
 
   - Die in Einzeldateien separierten Schematron-Pattern werden in
-    Unterverzeichnissen je Arbeitspaket erwartet. Sie wurden gegenüber
-    dem aktuellen Stand auf dem SharePoint-Server leicht angepasst, um
-    geeignete Bezeichnungen erzeugen zu können.
+    Unterverzeichnissen je Arbeitspaket erwartet.
 
     Die Einzeldateien sind für sich genommen keine validen
     Schematron-Dateien!
 
   - Die Regelbasis-Datei (Regelbasis.sch) enthält den Import der
-    Einzeldateien, deren Gruppierung in Schematron-Phases, die
-    Definition diverser XSL-Variablen für die Erzeugung geeigneter
-    Bezeichnungen und den Import der 'diagnostics.sch'.
-
-  - Die Diagnose-Datei (diagnostics.sch) enthält die Parameter für die
-    Erzeugung geeigneter Bezeichnungen, Objekt-GUID und Objekt-Typ.
+    Einzeldateien, deren Gruppierung in Schematron-Phases, für die
+    Validierung und Erzeugung von Bezeichnungen notwendige Funktionen
+    und Keys, die Definition diverser XSL-Variablen für die Erzeugung
+    geeigneter Bezeichnungen, die Parameter für die Erzeugung
+    geeigneter Bezeichnungen, Objekt-GUID und Objekt-Typ.
 
 * Verzeichnis 'Schematron':
 
-  Für die XSL-Prozessierungen wird der Saxon-HE 12.9 verwendet.
+  Für die XSL-Prozessierungen wird der Saxon-HE 12.9 verwendet. 
+  Die Dateien in diesem Ordner sind teilweise gegenüber den anderweitig 
+  öffentlich verfügbaren Versionen angepasst. Die Veränderungen können 
+  in der Versionsdokumentation in den jeweiligen Dateien nachvollzogen 
+  werden.
 
   Für die Schematron-Validierung einer PlanPro-Datei sind folgende
   Schritte durchzuführen:
@@ -115,27 +116,13 @@ PDF-Erstellung
    PDF-Datei detailliert ausgeführt sind, oder aufgrund der Menge
    weggelassen wurden. Falls dieser Parameter nicht beim XSL-Prozess
    gesetzt wird, kommt der Integer ‚50‘ zur Anwendung.
+   
+   ,logo-path‘ definiert den relativen Pfad zur Logo-Grafik-Datei
 
 * Verzeichnis 'Pictures':
 
   - Für die Generierung der PDF-Dateien benötigt der fop-Prozessor die
     hier enthaltenen SVG-Bilder
-
-* Verzeichnis 'font':
-
-  - Für die Generierung der PDF-Dateien benötigt der fop-Prozessor die
-  hier enthaltenen Schriftschnitte der DB Office im TrueType-Format,
-  ergänzt um fop-spezifische XML-Definitionen, die automatisch
-  generiert wurden
-  
-  - Erzeugung der fop-spezifischen Schriftmetriken (XML-Dateien im
-  'font'-Verzeichnis) für die Umgebung Mac OSX:
-
-  --> (https://svn.apache.org/repos/asf/xmlgraphics/site/deploy/fop/trunk/fonts.html)
-
-  - Beispielaufruf für einen Schriftschnitt
-
-    java -cp /Applications/Dev/fop-2.1/build/fop.jar:/Applications/Dev/fop-2.1/lib/avalon-framework-impl-4.3.1.jar:/Applications/Dev/fop-2.1/lib/commons-logging-1.0.4.jar:/Applications/Dev/fop-2.1/lib/commons-io-1.3.1.jar:/Applications/Dev/fop-2.1/lib/xmlgraphics-commons-2.1.jar org.apache.fop.fonts.apps.TTFReader font/dboff03.ttf font/dboff03.xml
 
 * Verzeichnis 'fop-support':
 
@@ -225,6 +212,8 @@ HTML-Erstellung
    Parameter nicht beim XSL-Prozess gesetzt wird, kommt die
    fehlgeschlagene XSD-Validierung, also ein invalides XML-Dokument,
    durch ‚false()‘ zur Anwendung.
+
+   ,logo-path‘ definiert den relativen Pfad zur Logo-Grafik-Datei
    
 * Verzeichnis 'Pictures':
 
