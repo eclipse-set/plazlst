@@ -46,4 +46,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: eclipse-set/set
-          event-type: "Rebuild with model update ${{ github.run_number }}"
+          event-type: "Rebuild with plaz update ${{ github.run_number }}"
