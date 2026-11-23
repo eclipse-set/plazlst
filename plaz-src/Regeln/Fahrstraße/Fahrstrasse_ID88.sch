@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="A011F1E5-6107-425B-9AAB-9FF1F0E9068B" see="Fahrstrasse_ID88" id="ID88" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="A011F1E5-6107-425B-9AAB-9FF1F0E9068B" id="ID88" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID88">
 	<iso:title>Bereichsende eines DWegs/Gefahrpunktabstands am Markanten Punkt</iso:title>
 	<iso:p>
-		<planpro:description>
-			Endet ein DWeg/Gefahrpunktabstand an einem Markanten Punkt, muss dessen Verortung identisch sein mit dem Ende
-			des zugehörigen Bereichsobjekts Fstr_Fahrweg. Der Fall "Ende am WA" wird in dieser Regel nicht berücksichtigt.
-			
-			Wenn Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Ziel == "Markanter_Punkt" und
-			Markanter_Punkt.ID_Markante_Stelle ≠ W_Kr_Gsp_Komponente, dann muss die Verortung des unter
-			Markanter_Punkt.ID_Markante_Stelle angegebenen Punktobjekts identisch mit der Verortung des Endes des Bereichsobjekts
-			Fstr_Fahrweg sein (Toleranz 0,01 m). 
-		</planpro:description>
+		<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>		Endet ein DWeg/Gefahrpunktabstand an einem Markanten Punkt, muss dessen Verortung identisch sein mit dem Ende
+		des zugehörigen Bereichsobjekts Fstr_Fahrweg. Der Fall "Ende am WA" wird in dieser Regel nicht berücksichtigt.
+		
+		Wenn Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Ziel == "Markanter_Punkt" und
+		Markanter_Punkt.ID_Markante_Stelle ≠ W_Kr_Gsp_Komponente, dann muss die Verortung des unter
+		Markanter_Punkt.ID_Markante_Stelle angegebenen Punktobjekts identisch mit der Verortung des Endes des Bereichsobjekts
+		Fstr_Fahrweg sein (Toleranz 0,01 m). 
+</code></pre>
+</planpro:description>
 		<planpro:comment>
 			Es wird nur abgeprüft, ob eine Grenze des Teilbereichs, der auf der TOP-Kante des Markanten Punkts liegt, mit der 
 			Verortung des Markanten Punkts übereinstimmt.
@@ -27,7 +27,7 @@
 		</planpro:test>
 		<planpro:output>Fstr_DWeg</planpro:output>
 	</iso:p>
-	<iso:rule role="error" context="Fstr_DWeg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-88(current(), parent::*)]">
+	<iso:rule context="Fstr_DWeg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-88(current(), parent::*)]" role="error">
 		<iso:let name="FstrFahrweg" value="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)"/>
 		<iso:let name="ID_Markanter_Punkt" value="key('Markanter_Punkt', $FstrFahrweg/ID_Ziel/Wert, parent::*)"/>
 			<!-- ID_Markante_Stelle only allowed once -->

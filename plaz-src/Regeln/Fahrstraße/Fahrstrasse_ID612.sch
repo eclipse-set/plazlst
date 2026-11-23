@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><planpro:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur">
-	<iso:pattern fpi="F78F4830-AEBC-441D-9169-51038C9F0555" see="Fahrstrasse_ID612" id="ID612-abstract" abstract="true" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3"><iso:title>Bereichsende Fahrweg bei Wirkrichtung des Startsignals entgegen Topologierichtung</iso:title><iso:p>
-			<planpro:description>
-				Ist die Wirkrichtung des Startsignals des Fahrwegs nicht identisch mit der Topologierichtung, 
-				muss der Wert von Begrenzung-B dem Abstand des Startsignals vom Anfang der TOP-Kante entsprechen (Toleranz ± 0,01 m).
-				Sofern ein weiterer Teilbereich für den Fahrweg existiert, 
-				muss der Wert Begrenzung-A im betrachteten Teilbereich gleich "0.000" sein.
-				
-				Wenn Fstr_Fahrweg.ID_Start → Signal.Punkt_Objekt_TOP_Kante.Wirkrichtung == "gegen", 
-				dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
-				← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
-				Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_B == Signal.Punkt_Objekt_TOP_Kante.Abstand (Toleranz ± 0,01 m).
-				Wenn Anzahl Fstr_Fahrweg.Bereich_Objekt_Teilbereich für verschiedene TOP_Kanten &gt; 1, 
-				dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
-				← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
-				Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_A == "0.000".
-			</planpro:description>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><planpro:pattern xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:iso="http://purl.oclc.org/dsdl/schematron">
+	<iso:pattern abstract="true" fpi="F78F4830-AEBC-441D-9169-51038C9F0555" id="ID612-abstract" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID612"><iso:title>Bereichsende Fahrweg bei Wirkrichtung des Startsignals entgegen Topologierichtung</iso:title><iso:p>
+			<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>			Ist die Wirkrichtung des Startsignals des Fahrwegs nicht identisch mit der Topologierichtung, 
+			muss der Wert von Begrenzung-B dem Abstand des Startsignals vom Anfang der TOP-Kante entsprechen (Toleranz ± 0,01 m).
+			Sofern ein weiterer Teilbereich für den Fahrweg existiert, 
+			muss der Wert Begrenzung-A im betrachteten Teilbereich gleich "0.000" sein.
+			
+			Wenn Fstr_Fahrweg.ID_Start → Signal.Punkt_Objekt_TOP_Kante.Wirkrichtung == "gegen", 
+			dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
+			← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
+			Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_B == Signal.Punkt_Objekt_TOP_Kante.Abstand (Toleranz ± 0,01 m).
+			Wenn Anzahl Fstr_Fahrweg.Bereich_Objekt_Teilbereich für verschiedene TOP_Kanten &gt; 1, 
+			dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
+			← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
+			Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_A == "0.000".
+</code></pre>
+</planpro:description>
 			<planpro:comment>
 				Um bei Signalen mit mehreren punktförmigen Verortungen die relevante punktförmige Verortung herauszufiltern:
 				Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante muss einer Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante entsprechen.
@@ -49,7 +49,7 @@
 				</planpro:error>
 			</planpro:test>
 			<planpro:output>Fstr_Fahrweg</planpro:output>
-		</iso:p><iso:include href="../incomplete/Fstr_Fahrweg-nil_Signalreferenz.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-miss_Signal.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-miss_same_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_Signal-Wirkrichtung.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_Signal-Abstand.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_Begrenzung_A_B.xml"/><iso:rule role="$Role" context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-255(current(), /*, $Signal-Referenz, $Wirkrichtung)]">
+		</iso:p><iso:include href="../incomplete/Fstr_Fahrweg-nil_Signalreferenz.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-miss_Signal.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-miss_same_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_Signal-Wirkrichtung.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_Signal-Abstand.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_Begrenzung_A_B.xml"/><iso:rule context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-255(current(), /*, $Signal-Referenz, $Wirkrichtung)]" role="$Role">
 			<iso:let name="Signal" value="key('Signal', $Signal-Referenz/Wert, /*)[1]"/>
 			<iso:let name="POT_Signal" value="$Signal/Punkt_Objekt_TOP_Kante[Wirkrichtung/Wert = $Wirkrichtung]     [ID_TOP_Kante/Wert = current()/Bereich_Objekt_Teilbereich/ID_TOP_Kante/Wert][1]"/>
 			<iso:let name="BOT_Fahrweg" value="Bereich_Objekt_Teilbereich[ID_TOP_Kante/Wert = $POT_Signal/ID_TOP_Kante/Wert]"/>
@@ -60,5 +60,5 @@
 			<iso:report diagnostics="guid typ bereich aufbau s1 s2 s3 s4 s5 s6 s7" test="abs(max($BOT_Fahrweg/Begrenzung_B/fx:number-or-zero(Wert)) - fx:number-or-zero($POT_Signal/Abstand/Wert)) gt $genauigkeit or     $weitereBOT-Afalsch">Signalverortung und Fahrwegdefinition sind inkonsistent. Die Wirkrichtung des Startsignals des Fahrwegs stimmt mit der Topologierichtung nicht überein, jedoch entspricht der Wert von Begrenzung-B nicht dem Abstand des Startsignals vom Anfang der TOP-Kante (Toleranz +/- 0,01 m).<iso:value-of select="if ($weitereBOT-Afalsch) then ' Der Wert von Begrenzung-A im betrachteten Teilbereich entspricht trotz Existenz eines weiteren Teilbereichs nicht 0.000.' else ''"/></iso:report>
 		</iso:rule></iso:pattern>
 	
-	<iso:pattern is-a="ID612-abstract" id="ID612"><iso:param name="Role" value="warning"/><iso:param name="Signal-Referenz" value="ID_Start"/><iso:param name="Wirkrichtung" value="'gegen'"/><iso:param name="ignore-Wirkrichtung" value="('in', 'beide')"/></iso:pattern>
+	<iso:pattern id="ID612" is-a="ID612-abstract"><iso:param name="Role" value="warning"/><iso:param name="Signal-Referenz" value="ID_Start"/><iso:param name="Wirkrichtung" value="'gegen'"/><iso:param name="ignore-Wirkrichtung" value="('in', 'beide')"/></iso:pattern>
 </planpro:pattern>

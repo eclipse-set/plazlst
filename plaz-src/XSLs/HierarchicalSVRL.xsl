@@ -17,7 +17,7 @@
     exclude-result-prefixes="xs svrl"
     version="2.0">
     
-    <xsl:variable name="dateOfDelivery">2026-09-25</xsl:variable>
+    <xsl:variable name="dateOfDelivery">insertdate</xsl:variable>
     
     <!-- The following variables support the processing duration prognosis and result in ms (milli seconds) 
             input_element_count: XPath count(//*) on the PlanPro-XML file 
@@ -27,10 +27,10 @@
             pdf-duration:       from FO to PDF
             html-duration:      from SVRL (via "GSVRL") to HTML
     -->
-    <xsl:variable name="total-duration">4.821e-01 * input_element_count^0.868 + 9308.3</xsl:variable>
-    <xsl:variable name="fo-duration">4.752e+00 * svrl_element_count^0.615 + 2349.2</xsl:variable>
-    <xsl:variable name="pdf-duration">8.103e-02 * svrl_element_count^1.061 + 3249.2</xsl:variable>
-    <xsl:variable name="html-duration">2.718e+00 * svrl_element_count^0.647 + 2350.0</xsl:variable>
+    <xsl:variable name="total-duration">5.185e-01 * input_element_count^0.872 + 8795.1</xsl:variable>
+    <xsl:variable name="fo-duration">4.440e+00 * svrl_element_count^0.618 + 2643.2</xsl:variable>
+    <xsl:variable name="pdf-duration">5.140e-02 * svrl_element_count^1.118 + 2938.5</xsl:variable>
+    <xsl:variable name="html-duration">2.422e+00 * svrl_element_count^0.654 + 2583.6</xsl:variable>
 
     <xsl:output method="xml" indent="yes"/>
     

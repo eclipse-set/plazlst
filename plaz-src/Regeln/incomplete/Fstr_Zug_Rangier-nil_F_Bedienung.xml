@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="F_Bedienung nil"
+    context="Fstr_Zug_Rangier
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [$relevanter-Fahrstrassentyp]
+    [fx:detect-nil(Fstr_Zug_Rangier_Allg/F_Bedienung)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="B21E6550-C876-4128-934E-553C0A76CDFD" see="Fahrstrasse_ID622" id="ID622" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="B21E6550-C876-4128-934E-553C0A76CDFD" id="ID622" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID622">
 	<iso:title>Bereichsende eines DWegs/Gefahrpunktabstands am WA</iso:title>
     <iso:p>
-      <planpro:description>
-      	Endet ein DWeg/Gefahrpunktabstand von der spitzen Seite der Weiche kommend am WA, muss die Verortung der referenzierten
-      	Weichen-Komponente im Abstand Null zum Ende des zugehörigen Bereichsobjekts Fstr_Fahrweg liegen (Toleranz 0,01 m). Die Prüfung
-      	beginnt bei einer der beiden TOP-Kanten, auf denen die Weichen-Komponente verortet ist. Ausgehend hiervon wird der zugehörige
-      	TOP-Knoten ermittelt. Im Anschluss wird die TOP-Kante gesucht, die die Weichenspitze repräsentiert. Zuletzt wird geprüft, ob
-      	das Bereichsobjekt DWeg/Gefahrpunktabstand (bzw. der zugehörige Fstr_Fahrweg) im Abstand Null zum TOP-Knoten endet.
-      	
-      	Wenn Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Ziel == "Markanter_Punkt" und
-      	Markanter_Punkt.ID_Markante_Stelle == W_Kr_Gsp_Komponente und W_Kr_Gsp_Komponente.ID_W_Kr_Gsp_Element
-      	→ W_Kr_Gsp_Element.Weiche_Element vorhanden ist und W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.ID_TOP_Kante ist ungleich
-      	Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante,
-      	dann muss die Verortung des unter Markanter_Punkt.ID_Markante_Stelle
-      	angegebenen Punktobjekts im Abstand Null zum Endes des Bereichsobjekts Fstr_Fahrweg liegen (Toleranz 0,01 m). Die Prüfung beginnt
-      	bei einer der beiden TOP-Kanten, auf denen die Weichen-Komponente verortet ist. Ausgehend hiervon wird der zugehörige TOP-Knoten
-      	ermittelt. Im Anschluss wird die TOP-Kante gesucht, die die Weichenspitze repräsentiert. Zuletzt wird geprüft, ob das Bereichsobjekt
-      	DWeg/Gefahrpunktabstand (bzw. der zugehörige Fstr_Fahrweg) im Abstand Null zum TOP-Knoten endet. 
-      </planpro:description>
+      <planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>  	Endet ein DWeg/Gefahrpunktabstand von der spitzen Seite der Weiche kommend am WA, muss die Verortung der referenzierten
+  	Weichen-Komponente im Abstand Null zum Ende des zugehörigen Bereichsobjekts Fstr_Fahrweg liegen (Toleranz 0,01 m). Die Prüfung
+  	beginnt bei einer der beiden TOP-Kanten, auf denen die Weichen-Komponente verortet ist. Ausgehend hiervon wird der zugehörige
+  	TOP-Knoten ermittelt. Im Anschluss wird die TOP-Kante gesucht, die die Weichenspitze repräsentiert. Zuletzt wird geprüft, ob
+  	das Bereichsobjekt DWeg/Gefahrpunktabstand (bzw. der zugehörige Fstr_Fahrweg) im Abstand Null zum TOP-Knoten endet.
+  	
+  	Wenn Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Ziel == "Markanter_Punkt" und
+  	Markanter_Punkt.ID_Markante_Stelle == W_Kr_Gsp_Komponente und W_Kr_Gsp_Komponente.ID_W_Kr_Gsp_Element
+  	→ W_Kr_Gsp_Element.Weiche_Element vorhanden ist und W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.ID_TOP_Kante ist ungleich
+  	Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante,
+  	dann muss die Verortung des unter Markanter_Punkt.ID_Markante_Stelle
+  	angegebenen Punktobjekts im Abstand Null zum Endes des Bereichsobjekts Fstr_Fahrweg liegen (Toleranz 0,01 m). Die Prüfung beginnt
+  	bei einer der beiden TOP-Kanten, auf denen die Weichen-Komponente verortet ist. Ausgehend hiervon wird der zugehörige TOP-Knoten
+  	ermittelt. Im Anschluss wird die TOP-Kante gesucht, die die Weichenspitze repräsentiert. Zuletzt wird geprüft, ob das Bereichsobjekt
+  	DWeg/Gefahrpunktabstand (bzw. der zugehörige Fstr_Fahrweg) im Abstand Null zum TOP-Knoten endet. 
+</code></pre>
+</planpro:description>
       <planpro:comment/>
       <planpro:test>
         <planpro:success>
@@ -31,7 +31,7 @@
       </planpro:test>
       <planpro:output>Fstr_DWeg</planpro:output>
     </iso:p>
-	<iso:rule role="error" context="Fstr_DWeg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-622(current(), parent::*)]">
+	<iso:rule context="Fstr_DWeg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-622(current(), parent::*)]" role="error">
 		<iso:let name="genauigkeit" value="0.01"/>
 		<iso:let name="FstrFahrweg" value="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*) "/>
 		<iso:let name="Markante_Stelle" value="key('Markanter_Punkt', $FstrFahrweg/ID_Ziel/Wert, parent::*)/ID_Markante_Stelle/Wert"/>

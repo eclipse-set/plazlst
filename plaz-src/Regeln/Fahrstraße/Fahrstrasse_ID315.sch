@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="A59B3A00-FBBA-4C46-9A12-6BB951CE561A" see="Fahrstrasse_ID315" id="ID315" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="A59B3A00-FBBA-4C46-9A12-6BB951CE561A" id="ID315" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID315">
 	<iso:title>Begrenzung des Fahrwegs einer MwTfstr (Start)</iso:title>
 	<iso:p>
-		<planpro:description>
-			Prüfung, ob ein zu einer MwTfstr gehörender Fahrweg an den dafür vorgesehenen Signalen beginnt.
-			
-			Wenn Fstr_Zug_Rangier.Fstr_Mittel gefüllt ist, dann muss Fstr_Zug_Rangier.ID_Fstr_Fahrweg → 
-			Fstr_Fahrweg.ID_Start ein Signal mit Signal.Signal_Fiktiv.Fiktives_Signal_Funktion == "Zug_Start_Mittelweiche"
-			oder "sonstige" sein.
-		</planpro:description>
+		<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>		Prüfung, ob ein zu einer MwTfstr gehörender Fahrweg an den dafür vorgesehenen Signalen beginnt.
+		
+		Wenn Fstr_Zug_Rangier.Fstr_Mittel gefüllt ist, dann muss Fstr_Zug_Rangier.ID_Fstr_Fahrweg → 
+		Fstr_Fahrweg.ID_Start ein Signal mit Signal.Signal_Fiktiv.Fiktives_Signal_Funktion == "Zug_Start_Mittelweiche"
+		oder "sonstige" sein.
+</code></pre>
+</planpro:description>
 		<planpro:comment/>
 		<planpro:test>
 			<planpro:success>
@@ -21,7 +21,7 @@
 		</planpro:test>
 		<planpro:output>Fstr_Zug_Rangier</planpro:output>
 	</iso:p>
-  <iso:rule role="error" context="Fstr_Zug_Rangier[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Fstr_Mittel]">
+  <iso:rule context="Fstr_Zug_Rangier[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Fstr_Mittel]" role="error">
   	<iso:let name="ID_Start" value="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)/ID_Start/Wert"/>	
     <!-- gefundene Signalarten -->
   	<iso:let name="Signal_Fiktiv_Art" value="key('Signal', $ID_Start, /*)/Signal_Fiktiv/Fiktives_Signal_Funktion/Wert"/>

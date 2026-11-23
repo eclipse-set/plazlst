@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><planpro:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur">
-	<iso:pattern fpi="7684A43E-10E2-459D-899B-2D90F85010A3" see="Fahrstrasse_ID623" id="ID623-abstract" abstract="true" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3"><iso:title>Bereichsende DWeg/GPA bei Wirkrichtung des Startsignals in Topologierichtung</iso:title><iso:p>
-			<planpro:description>
-				Ist die Wirkrichtung des Startsignals des DWegs/Gefahrpunktabstands identisch mit der Topologierichtung, 
-				muss der Wert von Begrenzung-A dem Abstand des Startsignals vom Anfang der TOP-Kante entsprechen (Toleranz ± 0,01 m).
-				Sofern ein weiterer Teilbereich für den DWeg/Gefahrpunktabstand existiert, 
-				muss der Wert Begrenzung-B im betrachteten Teilbereich gleich der Länge der TOP-Kante sein (Toleranz ± 0,01 m). 
-				
-				Wenn Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Start → Signal.Punkt_Objekt_TOP_Kante.Wirkrichtung == "in",
-				dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
-				← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
-				Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_A == Signal.Punkt_Objekt_TOP_Kante.Abstand (Toleranz ± 0,01 m).
-				Wenn Anzahl Fstr_Fahrweg.Bereich_Objekt_Teilbereich für verschiedene TOP_Kanten &gt; 1, 
-				dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
-				← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
-				Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_B == Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante → TOP_Kante.TOP_Kante_Allg.TOP_Laenge] (Toleranz ± 0,01 m). 
-			</planpro:description>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><planpro:pattern xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:iso="http://purl.oclc.org/dsdl/schematron">
+	<iso:pattern abstract="true" fpi="7684A43E-10E2-459D-899B-2D90F85010A3" id="ID623-abstract" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID623"><iso:title>Bereichsende DWeg/GPA bei Wirkrichtung des Startsignals in Topologierichtung</iso:title><iso:p>
+			<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>			Ist die Wirkrichtung des Startsignals des DWegs/Gefahrpunktabstands identisch mit der Topologierichtung, 
+			muss der Wert von Begrenzung-A dem Abstand des Startsignals vom Anfang der TOP-Kante entsprechen (Toleranz ± 0,01 m).
+			Sofern ein weiterer Teilbereich für den DWeg/Gefahrpunktabstand existiert, 
+			muss der Wert Begrenzung-B im betrachteten Teilbereich gleich der Länge der TOP-Kante sein (Toleranz ± 0,01 m). 
+			
+			Wenn Fstr_DWeg.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Start → Signal.Punkt_Objekt_TOP_Kante.Wirkrichtung == "in",
+			dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
+			← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
+			Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_A == Signal.Punkt_Objekt_TOP_Kante.Abstand (Toleranz ± 0,01 m).
+			Wenn Anzahl Fstr_Fahrweg.Bereich_Objekt_Teilbereich für verschiedene TOP_Kanten &gt; 1, 
+			dann muss für Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante → TOP_Kante 
+			← Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante gelten: 
+			Fstr_Fahrweg.Bereich_Objekt_Teilbereich.Begrenzung_B == Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante → TOP_Kante.TOP_Kante_Allg.TOP_Laenge] (Toleranz ± 0,01 m). 
+</code></pre>
+</planpro:description>
 			<planpro:comment>
 				Um bei Signalen mit mehreren punktförmigen Verortungen die relevante punktförmige Verortung herauszufiltern: 
 				Signal.Punkt_Objekt_TOP_Kante.ID_TOP_Kante muss einer Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante entsprechen.
@@ -53,7 +53,7 @@
 				</planpro:error>
 			</planpro:test>
 			<planpro:output>Fstr_DWeg</planpro:output>
-		</iso:p><iso:include href="../incomplete/Fstr_DWeg-nil_ID_Fstr_Fahrweg.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_Fstr_Fahrweg.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Signalreferenz.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_Signal.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_same_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Signal-Wirkrichtung.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Signal-Abstand.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Begrenzung_A_B.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_TOP_Laenge.xml"/><iso:rule role="$Role" context="Fstr_DWeg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-623(current(), /*, $Wirkrichtung)]">
+		</iso:p><iso:include href="../incomplete/Fstr_DWeg-nil_ID_Fstr_Fahrweg.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_Fstr_Fahrweg.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Signalreferenz.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_Signal.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_same_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Signal-Wirkrichtung.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Signal-Abstand.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_Begrenzung_A_B.xml"/><iso:include href="../incomplete/Fstr_DWeg-miss_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_DWeg-nil_TOP_Laenge.xml"/><iso:rule context="Fstr_DWeg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-623(current(), /*, $Wirkrichtung)]" role="$Role">
 			<iso:let name="Fstr_Fahrweg" value="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)"/>
 			<iso:let name="Signal" value="key('Signal', $Fstr_Fahrweg/$Signal-Referenz/Wert, /*)[1]"/>
 			<iso:let name="POT_Signal" value="$Signal/Punkt_Objekt_TOP_Kante[Wirkrichtung/Wert = $Wirkrichtung]     [ID_TOP_Kante/Wert = $Fstr_Fahrweg/Bereich_Objekt_Teilbereich/ID_TOP_Kante/Wert][1]"/>
@@ -66,6 +66,6 @@
 			<iso:report diagnostics="guid typ bereich aufbau s1 s2 s3 s4 s5 s6 s7" test="abs(min($BOT_Fahrweg/Begrenzung_A/fx:number-or-zero(Wert)) - fx:number-or-zero($POT_Signal/Abstand/Wert)) gt $genauigkeit or      $weitereBOT-Bfalsch">Signalverortung und Fahrwegdefinition sind inkonsistent. Die Wirkrichtung des Startsignals des DWegs/Gefahrpunktabstands stimmt mit der Topologierichtung überein, jedoch entspricht der Wert von Begrenzung-A nicht dem Abstand des Startsignals vom Anfang der TOP-Kante (Toleranz +/- 0,01 m).<iso:value-of select="if ($weitereBOT-Bfalsch) then ' Der Wert von Begrenzung-B im betrachteten Teilbereich entspricht trotz Existenz eines weiteren Teilbereichs nicht der Länge der TOP-Kante (Toleranz +/- 0,01 m).' else ''"/></iso:report>
 		</iso:rule></iso:pattern>
 	
-	<iso:pattern is-a="ID623-abstract" id="ID623"><iso:param name="Role" value="warning"/><iso:param name="Signal-Referenz" value="ID_Start"/><iso:param name="Wirkrichtung" value="'in'"/><iso:param name="ignore-Wirkrichtung" value="('gegen', 'beide')"/></iso:pattern>
+	<iso:pattern id="ID623" is-a="ID623-abstract"><iso:param name="Role" value="warning"/><iso:param name="Signal-Referenz" value="ID_Start"/><iso:param name="Wirkrichtung" value="'in'"/><iso:param name="ignore-Wirkrichtung" value="('gegen', 'beide')"/></iso:pattern>
 	
 </planpro:pattern>

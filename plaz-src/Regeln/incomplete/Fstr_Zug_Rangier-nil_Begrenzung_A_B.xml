@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron"  xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="relevante Begrenzung_A oder Begrenzung_B (in Fstr_Fahrweg.Bereich_Objekt_Teilbereich) nil"
+    context="Fstr_Zug_Rangier
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [$relevanter-Fahrstrassentyp]
+    [fx:detect-nil(key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)
+      /Bereich_Objekt_Teilbereich/(Begrenzung_A | Begrenzung_B))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

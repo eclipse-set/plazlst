@@ -12,6 +12,7 @@
       <active pattern="ID116"/>
       <active pattern="ID344"/>
       <active pattern="ID345"/>
+      <active pattern="ID351"/>
       <active pattern="ID632"/>
       </phase>
    <phase id="BAHNSTEIGE">
@@ -29,7 +30,10 @@
       <active pattern="ID652"/>
       <active pattern="ID653"/>
       <active pattern="ID667"/>
+      <active pattern="ID670"/>
       <active pattern="ID671"/>
+      <active pattern="ID677"/>
+      <active pattern="ID678"/>
       </phase>
    <phase id="BASISOBJEKTE">
       <active pattern="ID178"/>
@@ -50,13 +54,16 @@
       <active pattern="ID101"/>
       <active pattern="ID11"/>
       <active pattern="ID14"/>
+      <active pattern="ID143"/>
       <active pattern="ID144"/>
       <active pattern="ID255"/>
       <active pattern="ID256"/>
       <active pattern="ID259"/>
+      <active pattern="ID266"/>
       <active pattern="ID270"/>
       <active pattern="ID272"/>
       <active pattern="ID278"/>
+      <active pattern="ID282"/>
       <active pattern="ID284"/>
       <active pattern="ID312"/>
       <active pattern="ID313"/>
@@ -93,6 +100,7 @@
       <active pattern="ID648"/>
       <active pattern="ID665"/>
       <active pattern="ID666"/>
+      <active pattern="ID682"/>
       <active pattern="ID7"/>
       <active pattern="ID76"/>
       <active pattern="ID88"/>
@@ -171,6 +179,7 @@
    <phase id="ERROR">
       <active pattern="ID116"/>
       <active pattern="ID344"/>
+      <active pattern="ID351"/>
       <active pattern="ID632"/>
       <active pattern="ID343"/>
       <active pattern="ID65"/>
@@ -183,15 +192,21 @@
       <active pattern="ID652"/>
       <active pattern="ID653"/>
       <active pattern="ID667"/>
+      <active pattern="ID670"/>
       <active pattern="ID671"/>
+      <active pattern="ID677"/>
+      <active pattern="ID678"/>
       <active pattern="ID178"/>
       <active pattern="ID642"/>
       <active pattern="ID643"/>
       <active pattern="ID101"/>
       <active pattern="ID11"/>
+      <active pattern="ID143"/>
+      <active pattern="ID266"/>
       <active pattern="ID270"/>
       <active pattern="ID272"/>
       <active pattern="ID278"/>
+      <active pattern="ID282"/>
       <active pattern="ID284"/>
       <active pattern="ID315"/>
       <active pattern="ID356"/>
@@ -211,6 +226,7 @@
       <active pattern="ID648"/>
       <active pattern="ID665"/>
       <active pattern="ID666"/>
+      <active pattern="ID682"/>
       <active pattern="ID7"/>
       <active pattern="ID76"/>
       <active pattern="ID88"/>
@@ -1306,6 +1322,7 @@
    <xsl:key name="BUE_Gleisbezogener_Gefahrraum" match="BUE_Gleisbezogener_Gefahrraum[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
    <xsl:key name="Datenpunkt" match="Datenpunkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
    <xsl:key name="ESTW_Zentraleinheit" match="ESTW_Zentraleinheit[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
+   <xsl:key name="Fachtelegramm" match="Fachtelegramm[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
    <xsl:key name="Fla_Schutz" match="Fla_Schutz[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
    <xsl:key name="FMA_Anlage" match="FMA_Anlage[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
    <xsl:key name="FMA_Komponente" match="FMA_Komponente[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Identitaet/Wert"/>
@@ -1356,6 +1373,7 @@
    <xsl:key name="Bedien_Platz-fuerUnterbringung" match="Bedien_Platz[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Unterbringung/Wert"/>
    <xsl:key name="BUE_Anlage-fuerBUE_Schnittstelle" match="BUE_Anlage[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_BUE_Schnittstelle/Wert"/>
    <xsl:key name="BUE_Einschaltung_Zuordnung-fuerBUE_Einschaltung" match="BUE_Einschaltung_Zuordnung[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_BUE_Einschaltung/Wert"/>
+   <xsl:key name="BUE_Schnittstelle-fuerStellelement" match="BUE_Schnittstelle[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Stellelement/Wert"/>
    <xsl:key name="Datenpunkt-fuerBezug_Funktional" match="Datenpunkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="DP_Bezug_Funktional/ID_DP_Bezug_Funktional/Wert"/>
    <xsl:key name="Datenpunkt-fuerGETCS_Bezug_Funktional" match="Datenpunkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="DP_Typ/DP_Typ_GETCS/ID_DP_Bezug_Funktional/Wert"/>
    <xsl:key name="Datenpunkt-fuerEinmesspunkt" match="Datenpunkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Datenpunkt_Einmesspunkt/ID_Einmesspunkt/Wert"/>
@@ -1386,12 +1404,14 @@
    <xsl:key name="Markanter_Punkt-fuerMarkante_Stelle" match="Markanter_Punkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Markante_Stelle/Wert"/>
    <xsl:key name="NB_Zone_Grenze-fuerMarkanter_Punkt" match="NB_Zone_Grenze[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Markanter_Punkt/Wert"/>
    <xsl:key name="PZB_Element-fuerPZB_Element_Zuordnung" match="PZB_Element[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_PZB_Element_Zuordnung/Wert"/>
+   <xsl:key name="PZB_Element-fuerStellelement" match="PZB_Element[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Stellelement/Wert"/>
    <xsl:key name="PZB_Element-fuerUnterbringung" match="PZB_Element[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Unterbringung/Wert"/>
-   <xsl:key name="Schloss-fuerSchlosskombination" match="Schloss[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Schloss_Sk/ID_Schlosskombination/Wert"/>
    <xsl:key name="PZB_Element_Zuordnung-fuerINA_Gefahrstelle" match="PZB_Element_Zuordnung[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="PZB_Element_Zuordnung_BP/INA_Gefahrstelle/ID_Markanter_Punkt/Wert"/>
+   <xsl:key name="Schloss-fuerSchlosskombination" match="Schloss[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Schloss_Sk/ID_Schlosskombination/Wert"/>
    <xsl:key name="Schloss-fuerSchluessel" match="Schloss[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Schluessel/Wert"/>
    <xsl:key name="Schloss-fuerSchluesselsperre" match="Schloss[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Schloss_Ssp/ID_Schluesselsperre/Wert"/>
    <xsl:key name="Schlosskombination-fuerUnterbringung" match="Schlosskombination[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Unterbringung/Wert"/>
+   <xsl:key name="Schluesselsperre-fuerStellelement" match="Schluesselsperre[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Stellelement/Wert"/>
    <xsl:key name="Schluesselsperre-fuerUnterbringung" match="Schluesselsperre[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Unterbringung/Wert"/>
    <xsl:key name="Signal-fuerStellelement" match="Signal[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="Signal_Real/Signal_Real_Aktiv/ID_Stellelement/Wert"/>
    <xsl:key name="Signal_Befestigung-fuerSignal_Befestigung" match="Signal_Befestigung[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" use="ID_Signal_Befestigung/Wert"/>
@@ -1490,20 +1510,91 @@
       <xsl:sequence select="string-join($signalbegriff-liste, ', ')"/>
    </xsl:function>
    
+   <xsl:function name="fx:Fstr_DWeg-fuerFstr_Aneinander" as="node()*">
+      <!-- Suche Fstr_DWeg für Fstr_Aneinander über die letzte Fstr_Zug_Rangier -->
+      <xsl:param name="current" as="node()*"/>
+      <xsl:param name="context" as="node()"/>
+      
+      <xsl:variable name="current-fstr-aneinander-zuordnung" select="key('Fstr_Aneinander_Zuordnung-fuerFstr_Aneinander', $current/Identitaet/Wert, $context)"/>
+      <xsl:variable name="current-fstr-zug-rangier" select="key('Fstr_Zug_Rangier', $current-fstr-aneinander-zuordnung/ID_Fstr_Zug_Rangier/Wert, $context)"/>
+      <xsl:variable name="relevant-ziel-fahrweg" select="fx:Fstr_Fahrweg-fuerFstr_Aneinander($current, $context, 'ziel')"/>
+      <xsl:sequence select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(          $current-fstr-zug-rangier[ID_Fstr_Fahrweg/Wert = $relevant-ziel-fahrweg/Identitaet/Wert],           $context)"/>
+   </xsl:function>
+
+   <xsl:function name="fx:Fstr_DWeg-fuerFstr_Zug_Rangier" as="node()*">
+      <!-- Suche Fstr_DWeg für Fstr_Zug_Rangier -->
+      <xsl:param name="current" as="node()*"/>
+      <xsl:param name="context" as="node()"/>
+      
+      <xsl:variable name="current-fstr-zug-rangier" as="node()*">
+         <xsl:choose>
+            <xsl:when test="$current/(ID_Fstr_Zug_Rangier | ID_Fstr_Rangier)">
+               <xsl:sequence select="key('Fstr_Zug_Rangier', $current/(ID_Fstr_Zug_Rangier | ID_Fstr_Rangier)/Wert, $context)"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:sequence select="$current"/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>         
+      <xsl:sequence select="key('Fstr_DWeg', $current-fstr-zug-rangier/*/*/ID_Fstr_DWeg/Wert, $context)"/>
+   </xsl:function>
+
+   <xsl:function name="fx:Fstr_Fahrweg-fuerFstr_Aneinander" as="node()*">
+      <!-- Suche Fstr_Fahrweg für Fstr_Aneinander über deren Fstr_Aneinander_Zuordnung und Fstr_Zug_Rangier
+         referenz: 'start' für ersten Fahrweg in Fstr_Aneinander,
+                   'ziel' für letzten Fahrweg in Fstr_Aneinander  -->
+      <xsl:param name="current" as="node()*"/>
+      <xsl:param name="context" as="node()"/>
+      <xsl:param name="referenz" as="xs:string*"/> 
+      
+      <xsl:variable name="current-fstr-aneinander-zuordnung" select="key('Fstr_Aneinander_Zuordnung-fuerFstr_Aneinander', $current/Identitaet/Wert, $context)"/>
+      <xsl:variable name="current-fstr-zug-rangier" select="key('Fstr_Zug_Rangier', $current-fstr-aneinander-zuordnung/ID_Fstr_Zug_Rangier/Wert, $context)"/>
+      <xsl:variable name="current-fstr-fahrweg" select="key('Fstr_Fahrweg', $current-fstr-zug-rangier/ID_Fstr_Fahrweg/Wert, $context)"/>
+      <xsl:choose>
+         <xsl:when test="$referenz = 'start'">
+            <xsl:sequence select="$current-fstr-fahrweg[not(ID_Start/Wert = $current-fstr-fahrweg/ID_Ziel/Wert)]"/>
+         </xsl:when>
+         <xsl:when test="$referenz = 'ziel'">
+            <xsl:sequence select="$current-fstr-fahrweg[not(ID_Ziel/Wert = $current-fstr-fahrweg/ID_Start/Wert)]"/>
+         </xsl:when>
+         <xsl:otherwise>
+            <xsl:sequence select="$current-fstr-fahrweg"/>
+         </xsl:otherwise>
+      </xsl:choose>
+   </xsl:function>
+   
+   <xsl:function name="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier" as="node()*">
+      <!-- Suche Fstr_Umfahrpunkt für Fstr_Zug_Rangier über deren Fstr_Fahrweg-->
+      <xsl:param name="current" as="node()*"/>
+      <xsl:param name="context" as="node()"/>
+      
+      <xsl:variable name="current-fstr-zug-rangier" as="node()*">
+         <xsl:choose>
+            <xsl:when test="$current/(ID_Fstr_Zug_Rangier | ID_Fstr_Rangier)">
+               <xsl:sequence select="key('Fstr_Zug_Rangier', $current/(ID_Fstr_Zug_Rangier | ID_Fstr_Rangier)/Wert, $context)"/>
+            </xsl:when>
+            <xsl:otherwise>
+               <xsl:sequence select="$current"/>
+            </xsl:otherwise>
+         </xsl:choose>
+      </xsl:variable>
+      <xsl:sequence select="key('Fstr_Umfahrpunkt-fuerFstr_Fahrweg',                               key('Fstr_Fahrweg', $current-fstr-zug-rangier/ID_Fstr_Fahrweg/Wert, $context)                             /Identitaet/Wert, $context)"/>
+   </xsl:function>      
+      
+   <xsl:function name="fx:Signal-fuerSignalbegriff" as="node()*">
+      <!-- Suche Signale für Signalbegriffe über deren Signalrahmen -->
+      <xsl:param name="current-signalbegriff" as="node()*"/>
+      <xsl:param name="context" as="node()"/>
+      
+      <xsl:sequence select="key('Signal',          key('Signal_Rahmen', $current-signalbegriff/ID_Signal_Rahmen/Wert, $context)          /ID_Signal/Wert, $context)"/>
+   </xsl:function>
+
    <xsl:function name="fx:Signalbegriff-fuerSignal" as="node()*">
       <!-- Suche Signalbegriffe für Signale über deren Signalrahmen -->
       <xsl:param name="current-signal" as="node()*"/>
       <xsl:param name="context" as="node()"/>
       
       <xsl:sequence select="key('Signal_Signalbegriff-fuerSignal_Rahmen',                               key('Signal_Rahmen-fuerSignal', $current-signal/Identitaet/Wert, $context)                             /Identitaet/Wert, $context)"/>
-   </xsl:function>
- 
-   <xsl:function name="fx:Signal-fuerSignalbegriff" as="node()*">
-      <!-- Suche Signale für Signalbegriffe über deren Signalrahmen -->
-      <xsl:param name="current-signalbegriff" as="node()*"/>
-      <xsl:param name="context" as="node()"/>
-      
-      <xsl:sequence select="key('Signal',                               key('Signal_Rahmen', $current-signalbegriff/ID_Signal_Rahmen/Wert, $context)                             /ID_Signal/Wert, $context)"/>
    </xsl:function>
    
    <xsl:function name="fx:SignalRahmen-fuerSignalBefestigung" as="node()*">
@@ -1632,7 +1723,7 @@
             </xsl:otherwise>
          </xsl:choose>
       </xsl:variable>
-      <xsl:sequence select="string-join($current-datenpunkt/DP_Typ/*/           (DP_Typ_ETCS | DP_Typ_ESG | DP_Typ_GNT | DP_Typ_ZBS | DP_Typ_Trans | DP_Typ_Sonst)/Wert, ', ')"/>
+      <xsl:sequence select="string-join(for $i in $current-datenpunkt/DP_Typ/*/           (DP_Typ_ETCS | DP_Typ_ESG | DP_Typ_GNT | DP_Typ_ZBS | DP_Typ_Trans | DP_Typ_Sonst)          return fx:Bezeichnung-fuerSonstige($i, $context, (), 'Sonstiger Datenpunkttyp'), ', ')"/>
    </xsl:function>
  
    <xsl:function name="fx:Art-fuerFMA_Komponente" as="xs:string">
@@ -2949,6 +3040,14 @@
       <xsl:sequence select="exists(key('Markanter_Punkt',                                     key('Fstr_Fahrweg', $current/ID_Fstr_Fahrweg/Wert, $context)                                     /ID_Ziel/Wert, $context))"/>
    </xsl:function>
    
+   <xsl:function name="fx:Fstr-143" as="xs:boolean">
+      <!-- Prüfung, ob am ID_Start des Fstr_DWeg auch eine Fstr_Zug_Rangier mit Fstr_Zug vorhanden ist -->
+      <xsl:param name="current" as="node()"/>
+      <xsl:param name="context" as="node()"/>
+      
+      <xsl:sequence select="exists(          key('Fstr_Zug_Rangier-fuerFstr_Fahrweg',              key('Fstr_Fahrweg-fuerStart',                 key('Fstr_Fahrweg', $current/ID_Fstr_Fahrweg/Wert, $context)             /ID_Start/Wert, $context)          /Identitaet/Wert, $context)/Fstr_Zug)"/>
+   </xsl:function>
+   
    <xsl:function name="fx:Fstr-144" as="xs:boolean">
       <!-- Prüfung, ob Fstr_Fahrweg vorhanden und Fahrweg mind. 30m lang -->
       <xsl:param name="current" as="node()"/>
@@ -2992,6 +3091,17 @@
       <xsl:sequence select="exists(key('Fstr_DWeg',                                  key('Fstr_Zug_Rangier-fuerFstr_Fahrweg', $current/Identitaet/Wert , $context)                               /Fstr_Zug/Fstr_Zug_DWeg/ID_Fstr_DWeg/Wert, $context)                               [Fstr_DWeg_Spezifisch])"/> 
    </xsl:function>
    
+   <xsl:function name="fx:Fstr-282" as="xs:boolean">
+      <!-- Prüfung, ob aktuelle Fahrstraße, die ID_Ziel mit fiktiven Signalfunktionen umsetzt,
+            fachlicher Klartext, bspw.: Zugausfahrstraße, die auf eine Strecke oder auf eine Awanst führt -->
+      <xsl:param name="current" as="node()"/>
+      <xsl:param name="context" as="node()"/>
+      <xsl:param name="fahrstrassentyp" as="node()*"/>
+      <xsl:param name="fiktive-signal-funktion" as="xs:string*"/>
+      
+      <xsl:sequence select="$fahrstrassentyp and key('Fstr_Fahrweg', $current/ID_Fstr_Fahrweg/Wert, $context)          [key('Signal', ID_Ziel/Wert, $context)[Signal_Fiktiv/Fiktives_Signal_Funktion/Wert          = $fiktive-signal-funktion]]"/>            
+   </xsl:function>
+   
    <xsl:function name="fx:Fstr-371" as="xs:boolean">
       <!-- Prüfung, ob ein Fstr_Dweg_W_Kr für aktuellen Fstr_DWeg vorhanden ist
            -->
@@ -3011,8 +3121,11 @@
             die weder auf eine Strecke noch auf eine Awanst führt -->
       <xsl:param name="current" as="node()"/>
       <xsl:param name="context" as="node()"/>
+      <xsl:param name="fahrstrassentyp" as="node()*"/>
+      <xsl:param name="fahrstrassenart" as="xs:string*"/>
+      <xsl:param name="ignore-fiktive-signal-funktion" as="xs:string*"/>
       
-      <xsl:sequence select="exists($current[Fstr_Zug/Fstr_Zug_Art/Wert = ('ZT', 'ZTU')]                            [key('Fstr_Fahrweg', $current/ID_Fstr_Fahrweg/Wert, $context)                            [key('Signal', ID_Ziel/Wert, $context)[not(Signal_Fiktiv/Fiktives_Signal_Funktion/Wert                            = ('Zug_Ziel_Awanst', 'Zug_Ziel_Strecke'))]]                            /ID_Start = key('Fstr_Fahrweg', $current/../Fstr_Zug_Rangier                                  [Fstr_Zug/Fstr_Zug_Art/Wert = ('ZT', 'ZTU')]                                                         /ID_Fstr_Fahrweg/Wert, $context)/ID_Ziel])"/>            
+      <xsl:sequence select="exists($current[$fahrstrassentyp/*/Wert = $fahrstrassenart]                            [key('Fstr_Fahrweg', $current/ID_Fstr_Fahrweg/Wert, $context)                            [key('Signal', ID_Ziel/Wert, $context)                            [not(Signal_Fiktiv/Fiktives_Signal_Funktion/Wert                            = $ignore-fiktive-signal-funktion)]]                            /ID_Start = key('Fstr_Fahrweg', ($current/../Fstr_Zug_Rangier                            [$fahrstrassentyp/*/Wert = $fahrstrassenart] except $current)                                                         /ID_Fstr_Fahrweg/Wert, $context)/ID_Ziel])"/>            
    </xsl:function>
    
    <xsl:function name="fx:Fstr-377" as="xs:boolean">
@@ -3203,13 +3316,14 @@
       <xsl:sequence select="$current/Zungenpaar/Elektrischer_Antrieb_Anzahl/Wert = '0' and          not(key('W_Kr_Gsp_Element', $current/ID_W_Kr_Gsp_Element/Wert, $context)          /W_Kr_Gsp_Element_Allg/W_Kr_Gsp_Stellart/Wert = ('Rueckfallweiche', 'ZHA'))"/>
    </xsl:function>
    
-   <xsl:function name="fx:WGsp-193" as="xs:boolean">
-      <!-- Prüfung, ob zugehörige W_Kr_Anlage, darin W_Kr_Art = "Kr" oder "Flachkreuzung"
-            fachlicher Klartext: Kreuzung -->
+   <xsl:function name="fx:WGsp-W_Kr_Art" as="xs:boolean">
+      <!-- Prüfung, ob zugehörige W_Kr_Anlage, relevante W_Kr_Art besitzt"
+            fachlicher Klartext: Ob die Weiche oder die Kreuzung eine bestimmte Art hat -->
       <xsl:param name="current" as="node()"/>
       <xsl:param name="context" as="node()"/>
+      <xsl:param name="weichen_kreuzungs_art" as="xs:string*"/>
       
-      <xsl:sequence select="exists(key('W_Kr_Anlage', $current/ID_W_Kr_Anlage/Wert, $context)             [W_Kr_Anlage_Allg/W_Kr_Art/Wert = ('Kr', 'BKr', 'IBKr', 'Flachkreuzung')])"/>
+      <xsl:sequence select="exists(key('W_Kr_Anlage', $current/ID_W_Kr_Anlage/Wert, $context)             [W_Kr_Anlage_Allg/W_Kr_Art/Wert = $weichen_kreuzungs_art])"/>
    </xsl:function>
    
    <xsl:function name="fx:WGsp-195" as="xs:boolean">
@@ -3250,64 +3364,94 @@
 <!--Einbinden der modularisierten Regeldateien-->
    <include href="Ansteuerung_Element/Ansteuerung_Element_ID116.sch"/>
 <include href="Ansteuerung_Element/Ansteuerung_Element_ID344.sch"/>
-<include href="Ansteuerung_Element/Ansteuerung_Element_ID345.sch"/>
+<include href="Ansteuerung_Element/Ansteuerung_Element_ID345.sch#ID345-abstract"/>
+<include href="Ansteuerung_Element/Ansteuerung_Element_ID345.sch#ID345"/>
+<include href="Ansteuerung_Element/Ansteuerung_Element_ID351.sch#ID351-abstract"/>
+<include href="Ansteuerung_Element/Ansteuerung_Element_ID351.sch#ID351"/>
 <include href="Ansteuerung_Element/Ansteuerung_Element_ID632.sch"/>
 <include href="Bahnsteige/Bahnsteige_ID343.sch"/>
 <include href="Bahnsteige/Bahnsteige_ID65.sch"/>
-<include href="Balisentechnik_ETCS/ETCS_ID625.sch"/>
-<include href="Balisentechnik_ETCS/ETCS_ID626.sch"/>
+<include href="Balisentechnik_ETCS/ETCS_ID625.sch#ID625-abstract"/>
+<include href="Balisentechnik_ETCS/ETCS_ID625.sch#ID625"/>
+<include href="Balisentechnik_ETCS/ETCS_ID626.sch#ID626-abstract"/>
+<include href="Balisentechnik_ETCS/ETCS_ID626.sch#ID626"/>
 <include href="Balisentechnik_ETCS/ETCS_ID627.sch"/>
 <include href="Balisentechnik_ETCS/ETCS_ID628.sch"/>
 <include href="Balisentechnik_ETCS/ETCS_ID630.sch"/>
 <include href="Balisentechnik_ETCS/ETCS_ID631.sch"/>
-<include href="Balisentechnik_ETCS/ETCS_ID638.sch"/>
+<include href="Balisentechnik_ETCS/ETCS_ID638.sch#ID638-abstract"/>
+<include href="Balisentechnik_ETCS/ETCS_ID638.sch#ID638"/>
 <include href="Balisentechnik_ETCS/ETCS_ID652.sch"/>
 <include href="Balisentechnik_ETCS/ETCS_ID653.sch"/>
 <include href="Balisentechnik_ETCS/ETCS_ID667.sch#ID667-abstract"/>
 <include href="Balisentechnik_ETCS/ETCS_ID667.sch#ID667"/>
+<include href="Balisentechnik_ETCS/ETCS_ID670.sch#ID670-abstract"/>
+<include href="Balisentechnik_ETCS/ETCS_ID670.sch#ID670"/>
 <include href="Balisentechnik_ETCS/ETCS_ID671.sch#ID671-abstract"/>
 <include href="Balisentechnik_ETCS/ETCS_ID671.sch#ID671"/>
-<include href="Basisobjekte/Basisobjekte_ID178.sch"/>
+<include href="Balisentechnik_ETCS/ETCS_ID677.sch#ID677-abstract"/>
+<include href="Balisentechnik_ETCS/ETCS_ID677.sch#ID677"/>
+<include href="Balisentechnik_ETCS/ETCS_ID678.sch#ID678-abstract"/>
+<include href="Balisentechnik_ETCS/ETCS_ID678.sch#ID678"/>
+<include href="Basisobjekte/Basisobjekte_ID178.sch#ID178-abstract"/>
+<include href="Basisobjekte/Basisobjekte_ID178.sch#ID178"/>
 <include href="Basisobjekte/Basisobjekte_ID642.sch"/>
 <include href="Basisobjekte/Basisobjekte_ID643.sch"/>
-<include href="Basisobjekte/Basisobjekte_ID655.sch"/>
-<include href="Basisobjekte/Basisobjekte_ID656.sch"/>
-<include href="Basisobjekte/Basisobjekte_ID657.sch"/>
+<include href="Basisobjekte/Basisobjekte_ID655.sch#ID655-abstract"/>
+<include href="Basisobjekte/Basisobjekte_ID655.sch#ID655"/>
+<include href="Basisobjekte/Basisobjekte_ID656.sch#ID656-abstract"/>
+<include href="Basisobjekte/Basisobjekte_ID656.sch#ID656"/>
+<include href="Basisobjekte/Basisobjekte_ID657.sch#ID657-abstract"/>
+<include href="Basisobjekte/Basisobjekte_ID657.sch#ID657"/>
 <include href="Basisobjekte/Basisobjekte_ID658.sch"/>
-<include href="Basisobjekte/Basisobjekte_ID659.sch"/>
-<include href="Basisobjekte/Basisobjekte_ID660.sch"/>
+<include href="Basisobjekte/Basisobjekte_ID659.sch#ID659-abstract"/>
+<include href="Basisobjekte/Basisobjekte_ID659.sch#ID659"/>
+<include href="Basisobjekte/Basisobjekte_ID660.sch#ID660-abstract"/>
+<include href="Basisobjekte/Basisobjekte_ID660.sch#ID660"/>
 <include href="Basisobjekte/Basisobjekte_ID661.sch"/>
 <include href="Basisobjekte/Basisobjekte_ID662.sch"/>
 <include href="Basisobjekte/Basisobjekte_ID663.sch#ID663-abstract"/>
 <include href="Basisobjekte/Basisobjekte_ID663.sch#ID663"/>
 <include href="Basisobjekte/Basisobjekte_ID664.sch#ID664-abstract"/>
 <include href="Basisobjekte/Basisobjekte_ID664.sch#ID664"/>
-<include href="Fahrstraße/Fahrstrasse_ID101.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID101.sch#ID101-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID101.sch#ID101"/>
 <include href="Fahrstraße/Fahrstrasse_ID11.sch"/>
-<include href="Fahrstraße/Fahrstrasse_ID14.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID14.sch#ID14-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID14.sch#ID14"/>
+<include href="Fahrstraße/Fahrstrasse_ID143.sch#ID143-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID143.sch#ID143"/>
 <include href="Fahrstraße/Fahrstrasse_ID144.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID255.sch#ID255-abstract"/>
 <include href="Fahrstraße/Fahrstrasse_ID255.sch#ID255"/>
 <include href="Fahrstraße/Fahrstrasse_ID256.sch#ID256-abstract"/>
 <include href="Fahrstraße/Fahrstrasse_ID256.sch#ID256"/>
 <include href="Fahrstraße/Fahrstrasse_ID259.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID266.sch#ID266-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID266.sch#ID266"/>
 <include href="Fahrstraße/Fahrstrasse_ID270.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID272.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID278.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID282.sch#ID282-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID282.sch#ID282"/>
 <include href="Fahrstraße/Fahrstrasse_ID284.sch"/>
-<include href="Fahrstraße/Fahrstrasse_ID312.sch"/>
-<include href="Fahrstraße/Fahrstrasse_ID313.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID312.sch#ID312-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID312.sch#ID312"/>
+<include href="Fahrstraße/Fahrstrasse_ID313.sch#ID313-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID313.sch#ID313"/>
 <include href="Fahrstraße/Fahrstrasse_ID314.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID315.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID316.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID356.sch"/>
-<include href="Fahrstraße/Fahrstrasse_ID357.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID357.sch#ID357-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID357.sch#ID357"/>
 <include href="Fahrstraße/Fahrstrasse_ID360.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID361.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID366.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID371.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID372.sch"/>
-<include href="Fahrstraße/Fahrstrasse_ID374.sch"/>
+<include href="Fahrstraße/Fahrstrasse_ID374.sch#ID374-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID374.sch#ID374"/>
 <include href="Fahrstraße/Fahrstrasse_ID377.sch#ID377-abstract"/>
 <include href="Fahrstraße/Fahrstrasse_ID377.sch#ID377"/>
 <include href="Fahrstraße/Fahrstrasse_ID387.sch"/>
@@ -3341,6 +3485,8 @@
 <include href="Fahrstraße/Fahrstrasse_ID665.sch#ID665"/>
 <include href="Fahrstraße/Fahrstrasse_ID666.sch#ID666-abstract"/>
 <include href="Fahrstraße/Fahrstrasse_ID666.sch#ID666"/>
+<include href="Fahrstraße/Fahrstrasse_ID682.sch#ID682-abstract"/>
+<include href="Fahrstraße/Fahrstrasse_ID682.sch#ID682"/>
 <include href="Fahrstraße/Fahrstrasse_ID7.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID76.sch"/>
 <include href="Fahrstraße/Fahrstrasse_ID88.sch"/>
@@ -3374,9 +3520,12 @@
 <include href="Signale/Signale_ID649.sch"/>
 <include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID184.sch#ID184-abstract"/>
 <include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID184.sch#ID184"/>
-<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID188.sch"/>
-<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID193.sch"/>
-<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID194.sch"/>
+<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID188.sch#ID188-abstract"/>
+<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID188.sch#ID188"/>
+<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID193.sch#ID193-abstract"/>
+<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID193.sch#ID193"/>
+<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID194.sch#ID194-abstract"/>
+<include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID194.sch#ID194"/>
 <include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID195.sch"/>
 <include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID244.sch#ID244-abstract"/>
 <include href="Weichen_und_Gleissperren/Weichen_und_Gleissperren_ID244.sch#ID244"/>
@@ -4423,15 +4572,33 @@
     </xsl:template>
     
     <xsl:template match="Fstr_Aneinander" mode="diagnostic-aufbau" as="xs:string?">
-        <xsl:sequence select="'00'"/>
+        <xsl:choose>
+            <xsl:when test="fx:Fstr_DWeg-fuerFstr_Aneinander(., parent::*)">
+                <xsl:sequence select="'12'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="'02'"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="Fstr_Aneinander" mode="diagnostic-s1" as="xs:string?">
-        <xsl:sequence select="'Aneinander gereihte Fahrstraße'"/>
+        <xsl:sequence select="'Aneinandergereihte Fahrstraße'"/>
     </xsl:template>
     
     <xsl:template match="Fstr_Aneinander" mode="diagnostic-s2" as="xs:string?">
-        <xsl:sequence select="Fstr_Aneinander_Bedienstring/Wert/text()"/>
+        <xsl:sequence select="fx:Bezeichnung-fuerFstrStart(fx:Fstr_Fahrweg-fuerFstr_Aneinander(., parent::*, 'start'), /*)"/>
+    </xsl:template>
+
+    <xsl:template match="Fstr_Aneinander" mode="diagnostic-s3" as="xs:string?">
+        <xsl:sequence select="fx:Bezeichnung-fuerFstrZiel(fx:Fstr_Fahrweg-fuerFstr_Aneinander(., parent::*, 'ziel'), /*)"/>
+    </xsl:template>
+
+    <xsl:template match="Fstr_Aneinander" mode="diagnostic-s4" as="xs:string?">
+        <xsl:variable name="relevant-dweg" select="fx:Fstr_DWeg-fuerFstr_Aneinander(., parent::*)"/>
+        <xsl:if test="$relevant-dweg">
+            <xsl:sequence select="fx:Bezeichnung-fuerFstrDWeg($relevant-dweg)"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="Fstr_DWeg" mode="diagnostic-aufbau" as="xs:string?">
@@ -4507,19 +4674,60 @@
         <xsl:sequence select="fx:Bezeichnung-fuerFMAAnlage-OertlicherElementname(., parent::*)"/>    
     </xsl:template>
      
-    <xsl:template match="Fstr_Signalisierung" mode="diagnostic-aufbau" as="xs:string?">
-        <xsl:variable name="current-fstr_zug_rangier" select="key('Fstr_Zug_Rangier', ID_Fstr_Zug_Rangier/Wert, parent::*)"/>
-        <xsl:variable name="current-fstr_fahrweg" select="key('Fstr_Fahrweg', $current-fstr_zug_rangier/ID_Fstr_Fahrweg/Wert, parent::*)"/>
-        <xsl:variable name="current-fstr_umfahrpunkt" select="key('Fstr_Umfahrpunkt-fuerFstr_Fahrweg', $current-fstr_fahrweg/Identitaet/Wert, /*)"/>
-        <xsl:variable name="current-dweg" select="key('Fstr_DWeg', $current-fstr_zug_rangier/*/*/ID_Fstr_DWeg/Wert, parent::*)"/>
+    <xsl:template match="Fstr_Rangier_Fla_Zuordnung" mode="diagnostic-aufbau" as="xs:string?">
+        <xsl:variable name="current-fstr-umfahrpunkt" select="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier(., /*)"/>
+        <xsl:variable name="current-dweg" select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(., parent::*)"/>
         <xsl:choose>
-            <xsl:when test="$current-fstr_umfahrpunkt and $current-dweg">
+            <xsl:when test="$current-fstr-umfahrpunkt and $current-dweg">
+                <xsl:sequence select="'25'"/>
+            </xsl:when>
+            <xsl:when test="$current-fstr-umfahrpunkt and not($current-dweg)">
+                <xsl:sequence select="'11'"/>
+            </xsl:when>
+            <xsl:when test="not($current-fstr-umfahrpunkt) and $current-dweg">
+                <xsl:sequence select="'12'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="'02'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="Fstr_Rangier_Fla_Zuordnung" mode="diagnostic-s1" as="xs:string?">
+        <xsl:sequence select="concat('Flankenschutzanforderung für ',              fx:Art-fuerFstrZugRangier(key('Fstr_Zug_Rangier', ID_Fstr_Rangier/Wert, parent::*), parent::*))"/>
+    </xsl:template>
+    
+    <xsl:template match="Fstr_Rangier_Fla_Zuordnung" mode="diagnostic-s2" as="xs:string?">
+        <xsl:sequence select="fx:Bezeichnung-fuerFstrStart(key('Fstr_Zug_Rangier', ID_Fstr_Rangier/Wert, parent::*), /*)"/>
+    </xsl:template>
+
+    <xsl:template match="Fstr_Rangier_Fla_Zuordnung" mode="diagnostic-s3" as="xs:string?">
+        <xsl:sequence select="fx:Bezeichnung-fuerFstrZiel(key('Fstr_Zug_Rangier', ID_Fstr_Rangier/Wert, parent::*), /*)"/>
+    </xsl:template>
+
+    <xsl:template match="Fstr_Rangier_Fla_Zuordnung" mode="diagnostic-s4" as="xs:string?">
+        <xsl:sequence select="fx:Bezeichnung-fuerFstrZwischenziel(key('Fstr_Zug_Rangier', ID_Fstr_Rangier/Wert, parent::*), /*)"/>
+    </xsl:template>
+
+    <xsl:template match="Fstr_Rangier_Fla_Zuordnung" mode="diagnostic-s5" as="xs:string?">
+        <xsl:variable name="current-fstr-umfahrpunkt" select="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier(., /*)"/>
+        <xsl:variable name="current-dweg" select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(., parent::*)"/>
+        <xsl:if test="$current-fstr-umfahrpunkt and $current-dweg">
+            <xsl:sequence select="fx:Bezeichnung-fuerFstrDWeg($current-dweg)"/>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="Fstr_Signalisierung" mode="diagnostic-aufbau" as="xs:string?">
+        <xsl:variable name="current-fstr-umfahrpunkt" select="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier(., /*)"/>
+        <xsl:variable name="current-dweg" select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(., parent::*)"/>
+        <xsl:choose>
+            <xsl:when test="$current-fstr-umfahrpunkt and $current-dweg">
                 <xsl:sequence select="'41'"/>
             </xsl:when>
-            <xsl:when test="$current-fstr_umfahrpunkt and not($current-dweg)">
+            <xsl:when test="$current-fstr-umfahrpunkt and not($current-dweg)">
                 <xsl:sequence select="'26'"/>
             </xsl:when>
-            <xsl:when test="not($current-fstr_umfahrpunkt) and $current-dweg">
+            <xsl:when test="not($current-fstr-umfahrpunkt) and $current-dweg">
                 <xsl:sequence select="'27'"/>
             </xsl:when>
             <xsl:otherwise>
@@ -4549,11 +4757,9 @@
     </xsl:template>
     
     <xsl:template match="Fstr_Signalisierung" mode="diagnostic-s6" as="xs:string?">
-        <xsl:variable name="current-fstr_zug_rangier" select="key('Fstr_Zug_Rangier', ID_Fstr_Zug_Rangier/Wert, parent::*)"/>
-        <xsl:variable name="current-fstr_fahrweg" select="key('Fstr_Fahrweg', $current-fstr_zug_rangier/ID_Fstr_Fahrweg/Wert, parent::*)"/>
-        <xsl:variable name="current-fstr_umfahrpunkt" select="key('Fstr_Umfahrpunkt-fuerFstr_Fahrweg', $current-fstr_fahrweg/Identitaet/Wert, /*)"/>
-        <xsl:variable name="current-dweg" select="key('Fstr_DWeg', $current-fstr_zug_rangier/*/*/ID_Fstr_DWeg/Wert, parent::*)"/>
-        <xsl:if test="$current-fstr_umfahrpunkt and $current-dweg">
+        <xsl:variable name="current-fstr-umfahrpunkt" select="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier(., /*)"/>
+        <xsl:variable name="current-dweg" select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(., parent::*)"/>
+        <xsl:if test="$current-fstr-umfahrpunkt and $current-dweg">
             <xsl:sequence select="fx:Bezeichnung-fuerFstrDWeg($current-dweg)"/>
         </xsl:if>
     </xsl:template>
@@ -4571,17 +4777,16 @@
     </xsl:template>
     
     <xsl:template match="Fstr_Zug_Rangier" mode="diagnostic-aufbau" as="xs:string?">
-        <xsl:variable name="current-fstr_fahrweg" select="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)"/>
-        <xsl:variable name="current-fstr_umfahrpunkt" select="key('Fstr_Umfahrpunkt-fuerFstr_Fahrweg', $current-fstr_fahrweg/Identitaet/Wert, /*)"/>
-        <xsl:variable name="current-dweg" select="key('Fstr_DWeg', */*/ID_Fstr_DWeg/Wert, parent::*)"/>
+        <xsl:variable name="current-fstr-umfahrpunkt" select="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier(., /*)"/>
+        <xsl:variable name="current-dweg" select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(., parent::*)"/>
         <xsl:choose>
-            <xsl:when test="$current-fstr_umfahrpunkt and $current-dweg">
+            <xsl:when test="$current-fstr-umfahrpunkt and $current-dweg">
                 <xsl:sequence select="'25'"/>
             </xsl:when>
-            <xsl:when test="$current-fstr_umfahrpunkt and not($current-dweg)">
+            <xsl:when test="$current-fstr-umfahrpunkt and not($current-dweg)">
                 <xsl:sequence select="'11'"/>
             </xsl:when>
-            <xsl:when test="not($current-fstr_umfahrpunkt) and $current-dweg">
+            <xsl:when test="not($current-fstr-umfahrpunkt) and $current-dweg">
                 <xsl:sequence select="'12'"/>
             </xsl:when>
             <xsl:otherwise>
@@ -4607,10 +4812,9 @@
     </xsl:template>
     
     <xsl:template match="Fstr_Zug_Rangier" mode="diagnostic-s5" as="xs:string?">
-        <xsl:variable name="current-fstr_fahrweg" select="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)"/>
-        <xsl:variable name="current-fstr_umfahrpunkt" select="key('Fstr_Umfahrpunkt-fuerFstr_Fahrweg', $current-fstr_fahrweg/Identitaet/Wert, /*)"/>
-        <xsl:variable name="current-dweg" select="key('Fstr_DWeg', */*/ID_Fstr_DWeg/Wert, parent::*)"/>
-        <xsl:if test="$current-fstr_umfahrpunkt and $current-dweg">
+        <xsl:variable name="current-fstr-umfahrpunkt" select="fx:Fstr_Umfahrpunkt-fuerFstr_Zug_Rangier(., /*)"/>
+        <xsl:variable name="current-dweg" select="fx:Fstr_DWeg-fuerFstr_Zug_Rangier(., parent::*)"/>
+        <xsl:if test="$current-fstr-umfahrpunkt and $current-dweg">
             <xsl:sequence select="fx:Bezeichnung-fuerFstrDWeg($current-dweg)"/>
         </xsl:if>
     </xsl:template>

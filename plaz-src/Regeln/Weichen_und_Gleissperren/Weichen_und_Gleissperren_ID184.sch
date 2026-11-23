@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><planpro:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur">
-	<iso:pattern fpi="CD163825-9E2B-4fd3-8E62-719F406C8DDE" see="Weichen_und_Gleissperren_ID184" id="ID184-abstract" abstract="true" planpro:arbeitspaket="Weichen_und_Gleissperren" planpro:version="1.10.0.3"><iso:title>Kein Zungenprüfkontakt ohne Weichenantrieb</iso:title><iso:p>
-		  <planpro:description>
-		      Sofern für eine Weiche (ohne Rückfallweichen oder Zungen- und herzstücklose Abzweigungen) kein elektrischer Weichenantrieb vorgesehen ist,
-		      darf auch kein Zungenprüfkontakt geplant werden. 
-		      
-		      Wenn W_Kr_Gsp_Element.W_Kr_Gsp_Element_Allg.W_Kr_Gsp_Stellart ≠ "Rueckfallweiche" oder "ZHA"
-		      und in den dazugehörigen W_Kr_Gsp_Komponente W_Kr_Gsp_Komponente.Zungenpaar.Elektrischer_Antrieb_Anzahl == "0",
-		      muss auch jeweils W_Kr_Gsp_Komponente.Zungenpaar.Zungenpruefkontakt_Anzahl == "0" sein.
-		  	</planpro:description>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><planpro:pattern xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:iso="http://purl.oclc.org/dsdl/schematron">
+	<iso:pattern abstract="true" fpi="CD163825-9E2B-4fd3-8E62-719F406C8DDE" id="ID184-abstract" planpro:arbeitspaket="Weichen_und_Gleissperren" planpro:version="1.10.0.3" see="Weichen_und_Gleissperren_ID184"><iso:title>Kein Zungenprüfkontakt ohne Weichenantrieb</iso:title><iso:p>
+		  <planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>	      Sofern für eine Weiche (ohne Rückfallweichen oder Zungen- und herzstücklose Abzweigungen) kein elektrischer Weichenantrieb vorgesehen ist,
+	      darf auch kein Zungenprüfkontakt geplant werden. 
+	      
+	      Wenn W_Kr_Gsp_Element.W_Kr_Gsp_Element_Allg.W_Kr_Gsp_Stellart ≠ "Rueckfallweiche" oder "ZHA"
+	      und in den dazugehörigen W_Kr_Gsp_Komponente W_Kr_Gsp_Komponente.Zungenpaar.Elektrischer_Antrieb_Anzahl == "0",
+	      muss auch jeweils W_Kr_Gsp_Komponente.Zungenpaar.Zungenpruefkontakt_Anzahl == "0" sein.
+</code></pre>
+</planpro:description>
 		    <planpro:comment>
 		      Prüfung entfällt, falls
 		      - Elektrischer_Antrieb_Anzahl nil
@@ -25,10 +25,10 @@
 		      </planpro:error>
 		    </planpro:test>
 		    <planpro:output>W_Kr_Gsp_Komponente</planpro:output>
-		  </iso:p><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_Elektrischer_Antrieb_Anzahl.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_ID_W_Kr_Gsp_Element.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-miss_W_Kr_Gsp_Element.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_W_Kr_Gsp_Stellart.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_Zungenprufkontakt_Anzahl.xml"/><iso:rule role="$Role" context="W_Kr_Gsp_Komponente[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:WGsp-184(current(), parent::*)]">
+		  </iso:p><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_Elektrischer_Antrieb_Anzahl.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_ID_W_Kr_Gsp_Element.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-miss_W_Kr_Gsp_Element.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_W_Kr_Gsp_Stellart.xml"/><iso:include href="../incomplete/W_Kr_Gsp_Komponente-nil_Zungenprufkontakt_Anzahl.xml"/><iso:rule context="W_Kr_Gsp_Komponente[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:WGsp-184(current(), parent::*)]" role="$Role">
 		    <iso:assert diagnostics="guid typ bereich aufbau s1 s2 s3 s4 s5 s6 s7" test="Zungenpaar/Zungenpruefkontakt_Anzahl/Wert = '0'">Mindestens eine Weichen-Komponente hat keinen elektrischen Antrieb, jedoch ist die Anzahl der Zungenprüfkontakte ungleich Null.</iso:assert>	
 		  </iso:rule></iso:pattern>
 	
-	<iso:pattern is-a="ID184-abstract" id="ID184"><iso:param name="Role" value="error"/><iso:param name="ignore-W_Kr_Gsp_Komponente" value="('Rueckfallweiche','ZHA')"/></iso:pattern>
+	<iso:pattern id="ID184" is-a="ID184-abstract"><iso:param name="Role" value="error"/><iso:param name="ignore-W_Kr_Gsp_Stellart" value="('Rueckfallweiche','ZHA')"/></iso:pattern>
 	
 </planpro:pattern>

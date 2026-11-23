@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="29DFAAAD-5311-4275-B3B9-D1C84C3870EE" see="Weichen_und_Gleissperren_ID249" id="ID249" planpro:arbeitspaket="Weichen_und_Gleissperren" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="29DFAAAD-5311-4275-B3B9-D1C84C3870EE" id="ID249" planpro:arbeitspaket="Weichen_und_Gleissperren" planpro:version="1.10.0.3" see="Weichen_und_Gleissperren_ID249">
 	<iso:title>TOP-Anschluss Links/Rechts/Spitze</iso:title>
 	<iso:p>
-		<planpro:description>
-			In Bezug auf einen TOP-Knoten dürfen für die Anschlüsse der TOP-Kanten die Werte "Links" (linker Weichenschenkel),
-			"Rechts" (rechter Weichenschenkel) und "Spitze" jeweils max. einmal vorhanden sein.
-			
-			Bei allen TOP_Kante.ID_TOP_Knoten_A (bzw. TOP_Kante.ID_TOP_Knoten_B) mit identischem Wert muss für die zugehörigen 
-			TOP_Kante.TOP_Kante_Allg.TOP_Anschluss_A (bzw. TOP_Kante.TOP_Kante_Allg.TOP_Anschluss_B) die Anzahl der Werte 
-			"Links", "Rechts" und "Spitze" jeweils ≤ 1 sein. 
-		</planpro:description>
+		<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>		In Bezug auf einen TOP-Knoten dürfen für die Anschlüsse der TOP-Kanten die Werte "Links" (linker Weichenschenkel),
+		"Rechts" (rechter Weichenschenkel) und "Spitze" jeweils max. einmal vorhanden sein.
+		
+		Bei allen TOP_Kante.ID_TOP_Knoten_A (bzw. TOP_Kante.ID_TOP_Knoten_B) mit identischem Wert muss für die zugehörigen 
+		TOP_Kante.TOP_Kante_Allg.TOP_Anschluss_A (bzw. TOP_Kante.TOP_Kante_Allg.TOP_Anschluss_B) die Anzahl der Werte 
+		"Links", "Rechts" und "Spitze" jeweils ≤ 1 sein. 
+</code></pre>
+</planpro:description>
 		<planpro:comment/>
 		<planpro:test>
 			<planpro:success>
@@ -25,7 +25,7 @@
 		</planpro:test>
 		<planpro:output>TOP_Knoten</planpro:output>
 	</iso:p>
-	<iso:rule role="error" context="TOP_Knoten[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][count((key('TOP_Kante-fuerTOP_Knoten_A', Identitaet/Wert, parent::*) | key('TOP_Kante-fuerTOP_Knoten_B', Identitaet/Wert, parent::*))) gt 1]">
+	<iso:rule context="TOP_Knoten[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][count((key('TOP_Kante-fuerTOP_Knoten_A', Identitaet/Wert, parent::*) | key('TOP_Kante-fuerTOP_Knoten_B', Identitaet/Wert, parent::*))) gt 1]" role="error">
 		<iso:let name="TOP_Kante-fuerA" value="key('TOP_Kante-fuerTOP_Knoten_A', Identitaet/Wert, parent::*)"/>
 		<iso:let name="TOP_Kante-fuerB" value="key('TOP_Kante-fuerTOP_Knoten_B', Identitaet/Wert, parent::*)"/>
 		<iso:let name="TOP_Anschluss_A" value="$TOP_Kante-fuerA/TOP_Kante_Allg/TOP_Anschluss_A"/>

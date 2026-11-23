@@ -10,9 +10,14 @@
     The software is developed for DB InfraGO and may be used by the costumer without any restrictions.
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format"
-    xmlns:fx="http://tu-dresden.de/vlp/schematron/functions" xmlns:gsvrl="http://tu-dresden.de/vlp/schematron/grouped-svrl"
-    xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:saxon="http://saxon.sf.net/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:fx="http://tu-dresden.de/vlp/schematron/functions" 
+    xmlns:gsvrl="http://tu-dresden.de/vlp/schematron/grouped-svrl"
+    xmlns:planpro="http://www.plan-pro.org/regeln/struktur" 
+    xmlns:saxon="http://saxon.sf.net/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="fx gsvrl planpro saxon xs xsl" version="2.0">
 
     <xsl:include href="svrl2any-base.xsl"/>
@@ -35,7 +40,9 @@
 
     <xsl:variable name="large-paragraph-distance" as="xs:string">30pt</xsl:variable>
     <xsl:variable name="small-paragraph-distance" as="xs:string">6pt</xsl:variable>
+    <xsl:variable name="small-label-distance" as="xs:string">7pt</xsl:variable>
     
+    <xsl:variable name="default-code-font-family" as="xs:string" select="'Consolas, Courier New, monospace'"/>
     <xsl:variable name="default-symbol-font-family" as="xs:string" select="'Cambria Math'"/>
     <!--
         <fo:inline font-family="Symbol" font-size="smaller">...</fo:inline>
@@ -88,6 +95,10 @@
     <xsl:variable name="roman-numerals-regex" as="xs:string"
         select="concat('[', string-join($roman-numerals-map/@from, ''), ']')"/>
 
+    <!-- Bullet glyphs per list nesting level; deeper levels cycle through the list -->
+    <xsl:variable name="xhtml-bullet-symbols" as="xs:string+"
+        select="('&#x00b7;', '&#x203A;', '&#x00BB;')"/>
+
     <xsl:attribute-set name="Page-Defaults">
         <xsl:attribute name="language">de</xsl:attribute>
     </xsl:attribute-set>
@@ -101,7 +112,6 @@
     <xsl:attribute-set name="Block-Abstand">
         <xsl:attribute name="space-before.minimum" select="$small-paragraph-distance"/>
         <xsl:attribute name="space-after.minimum" select="$small-paragraph-distance"/>
-        <xsl:attribute name="provisional-label-separation" select="$small-paragraph-distance"/>
     </xsl:attribute-set>
 
     <xsl:attribute-set name="Kopf-Fuss-Zeilen-Block">
@@ -116,7 +126,7 @@
     </xsl:attribute-set>
 
     <xsl:attribute-set name="Tabelle-Zeilen-Abstand">
-        <xsl:attribute name="padding-bottom">2pt</xsl:attribute>
+        <xsl:attribute name="padding-bottom" select="$small-paragraph-distance"/>
     </xsl:attribute-set>
 
     <xsl:attribute-set name="horizontale-Linie">
@@ -132,7 +142,7 @@
         <xsl:attribute name="space-before.conditionality">retain</xsl:attribute>
         <xsl:attribute name="space-after.minimum">9pt</xsl:attribute>
         <xsl:attribute name="hyphenate">false</xsl:attribute>
-        <xsl:attribute name="keep-with-next">always</xsl:attribute>
+<!--        <xsl:attribute name="keep-with-next">always</xsl:attribute>-->
     </xsl:attribute-set>
 
     <xsl:attribute-set name="Arbeitspaket-Ueberschrift">
@@ -142,7 +152,7 @@
         <xsl:attribute name="space-before.conditionality">retain</xsl:attribute>
         <xsl:attribute name="space-after.minimum">8pt</xsl:attribute>
         <xsl:attribute name="hyphenate">false</xsl:attribute>
-        <xsl:attribute name="keep-with-next">always</xsl:attribute>
+<!--       <xsl:attribute name="keep-with-next">always</xsl:attribute>-->
     </xsl:attribute-set>
 
     <xsl:attribute-set name="Technische-Regel-Ueberschrift">
@@ -152,7 +162,7 @@
         <xsl:attribute name="space-before.conditionality">retain</xsl:attribute>
         <xsl:attribute name="space-after.minimum">7pt</xsl:attribute>
         <xsl:attribute name="hyphenate">false</xsl:attribute>
-        <xsl:attribute name="keep-with-next">always</xsl:attribute>
+<!--        <xsl:attribute name="keep-with-next">always</xsl:attribute>-->
     </xsl:attribute-set>
 
     <xsl:attribute-set name="Objekt-Ueberschrift">
@@ -168,6 +178,18 @@
     <xsl:attribute-set name="messageText">
         <xsl:attribute name="font-size">10pt</xsl:attribute>
         <xsl:attribute name="margin">5pt</xsl:attribute>
+    </xsl:attribute-set>
+
+    <xsl:attribute-set name="Code-Text">
+<!--        <xsl:attribute name="font-family" select="$default-code-font-family"/>-->
+<!--        <xsl:attribute name="font-size">90%</xsl:attribute>-->
+<!--        <xsl:attribute name="font-stretch">ultra-condensed</xsl:attribute>-->
+<!--        <xsl:attribute name="font-variant">small-caps</xsl:attribute>-->
+<!--        <xsl:attribute name="font-weight">lighter</xsl:attribute>-->
+<!--            <xsl:attribute name="text-decoration">overline</xsl:attribute>-->
+<!--        <xsl:attribute name="border-style">dotted</xsl:attribute>-->
+<!--            <xsl:attribute name="background-color">#F2F2F2</xsl:attribute>-->
+        <xsl:attribute name="white-space-collapse">false</xsl:attribute>
     </xsl:attribute-set>
 
     <xsl:template match="/">
@@ -207,7 +229,7 @@
 
     <xsl:template name="general-page-settings">
         <fo:layout-master-set>
-            <fo:simple-page-master master-name="A4" page-height="11.69in" page-width="8.27in" margin-left="1.3in" margin-right="1.3in" margin-top="0pt"
+            <fo:simple-page-master master-name="A4" page-height="11.69in" page-width="8.27in" margin-left="1.0in" margin-right="1.0in" margin-top="0pt"
                 margin-bottom="0pt" hyphenate="true">
                 <fo:region-body margin-top="1in" margin-bottom="1in" column-count="1"/>
                 <fo:region-before region-name="page-header" overflow="hidden" extent="1in" display-align="center"/>
@@ -1003,15 +1025,14 @@
                 </fo:block>
 
                 <xsl:if test="$problems">
-                    <fo:block xsl:use-attribute-sets="Block-Abstand" font-weight="bold"
-                        keep-with-next="always"> Angaben zur Regel </fo:block>
+                    <fo:block xsl:use-attribute-sets="Block-Abstand" 
+                        font-weight="bold"> Angaben zur Regel </fo:block>
                 </xsl:if>
 
-                <fo:table xsl:use-attribute-sets="Block-Abstand Tabelle-Eigenschaften"
-                    keep-together.within-page="always">
-                    <fo:table-column column-width="20%"/>
+                <fo:table xsl:use-attribute-sets="Block-Abstand Tabelle-Eigenschaften">
+                    <fo:table-column column-width="18%"/>
                     <fo:table-column column-width="11%"/>
-                    <fo:table-column column-width="69%"/>
+                    <fo:table-column column-width="71%"/>
                     <fo:table-body>
                         <fo:table-row>
                             <fo:table-cell xsl:use-attribute-sets="Tabelle-Zeilen-Abstand">
@@ -1040,19 +1061,26 @@
                                 </fo:block>
                             </fo:table-cell>
                         </fo:table-row>
-                        <fo:table-row>
+                        <fo:table-row keep-together.within-page="always">
                             <fo:table-cell xsl:use-attribute-sets="Tabelle-Zeilen-Abstand">
                                 <fo:block>Inhalt:</fo:block>
                             </fo:table-cell>
                             <fo:table-cell xsl:use-attribute-sets="Tabelle-Zeilen-Abstand"
                                  number-columns-spanned="2">
-                                <fo:block text-align="justify">
-                                    <xsl:apply-templates mode="missing-or-content" select="node()[1]">
-                                        <xsl:with-param name="inhalt" tunnel="yes"
-                                            select="gsvrl:active-pattern/
-                                            gsvrl:text/planpro:description"/>
-                                    </xsl:apply-templates>
-                                </fo:block>
+                                    <xsl:choose>
+                                        <xsl:when test="gsvrl:active-pattern/gsvrl:text/planpro:description[@format = 'xhtml'][normalize-space(.) != '']">
+                                            <xsl:apply-templates mode="xhtml-handling"
+                                                select="gsvrl:active-pattern/gsvrl:text/planpro:description"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <fo:block xsl:use-attribute-sets="Block-Abstand"  text-align="justify">
+                                                <xsl:apply-templates mode="missing-or-content" select="node()[1]">
+                                                    <xsl:with-param name="inhalt" tunnel="yes"
+                                                    select="gsvrl:active-pattern/gsvrl:text/planpro:description"/>
+                                                </xsl:apply-templates>
+                                            </fo:block>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                             </fo:table-cell>
                         </fo:table-row>
                         <xsl:if test="not(ancestor::gsvrl:ignored)">
@@ -1176,16 +1204,17 @@
                                                             gsvrl:technical-rule[@fpi = $current-rule-fpi]/*/
                                                             gsvrl:fired-rule))"/>
                                                     </xsl:apply-templates>
-                                                    <fo:inline> (</fo:inline>
+                                                </fo:block>
+                                            </fo:table-cell>
+                                            <fo:table-cell xsl:use-attribute-sets="Tabelle-Zeilen-Abstand"  padding-left="2pt">
+                                                <fo:block>
+                                                    <fo:inline>(</fo:inline>
                                                     <xsl:apply-templates mode="missing-or-content" select="node()[1]">
                                                         <xsl:with-param name="inhalt" tunnel="yes"
                                                             select="fx:show-bereich(current())"/>
                                                     </xsl:apply-templates>
                                                     <fo:inline>)</fo:inline>
                                                 </fo:block>
-                                            </fo:table-cell>
-                                            <fo:table-cell>
-                                                <fo:block/>
                                             </fo:table-cell>
                                         </fo:table-row>
                                     </xsl:for-each>
@@ -1285,7 +1314,9 @@
         <xsl:variable name="border-color" as="xs:string" select="fx:select-schweregrad-color($current-detail/parent::*/@role)"/>
         <xsl:variable name="schweregrad-icon-path" as="xs:string" select="fx:select-schweregrad-icon($current-detail/parent::*/@role)"/>
 
-        <fo:list-block xsl:use-attribute-sets="Block-Abstand" provisional-distance-between-starts="{$small-paragraph-distance}">
+        <fo:list-block xsl:use-attribute-sets="Block-Abstand"
+            provisional-label-separation="{$small-paragraph-distance}"
+            provisional-distance-between-starts="{$small-paragraph-distance}">
             <fo:list-item>
                 <fo:list-item-label end-indent="label-end()">
                     <fo:block font-size="23pt" line-height="23pt" text-indent="-27pt" margin-top="-1pt">
@@ -1350,6 +1381,98 @@
         </fo:table-row>
     </xsl:template>
 
+    <!-- Entry point for XHTML handling -->
+    <xsl:template match="planpro:description" mode="xhtml-handling">
+        <xsl:apply-templates mode="xhtml-handling"/>
+    </xsl:template>
+
+    <!-- Whitespace-only text (e.g. indentation between block elements) is dropped -->
+    <xsl:template match="text()[normalize-space(.) = ''][
+        not(preceding-sibling::node()) or 
+        not(following-sibling::node()) or
+        preceding-sibling::node()[1][self::xhtml:p or self::xhtml:ul or self::xhtml:hr] or
+        following-sibling::node()[1][self::xhtml:p or self::xhtml:ul or self::xhtml:hr]]"
+        mode="xhtml-description" priority="2"/>
+    
+    <!-- Text: collapse whitespace runs but do not trim, so inline boundaries stay intact.
+     Then apply the Roman-numeral and math-symbol handling. -->
+    <xsl:template match="text()" mode="xhtml-handling">
+        <xsl:sequence select="fx:wrap-math-symbols(
+            fx:transliterate-roman-numerals(replace(., '\s+', ' ')))"/>
+    </xsl:template>
+
+    <!-- xhtml:p -> fo:block -->
+    <xsl:template match="xhtml:p | xhtml:pre" mode="xhtml-handling">
+        <fo:block xsl:use-attribute-sets="Block-Abstand" text-align="justify">
+            <xsl:apply-templates mode="xhtml-handling"/>
+        </fo:block>
+    </xsl:template>
+    
+    <!-- xhtml:hr -> empty block whose top border is the rule. -->
+    <xsl:template match="xhtml:hr" mode="xhtml-handling">
+        <fo:block line-height="0pt" border-top="solid 1pt black"
+            space-before.minimum="{$small-paragraph-distance}"
+            space-after.minimum="{$small-paragraph-distance}"/>
+    </xsl:template>
+    
+    <!-- xhtml:ul -> fo:list-block with bullet items -->
+    <xsl:template match="xhtml:ul" mode="xhtml-handling">
+        <fo:list-block space-before.minimum="0pt" space-after.minimum="{$small-paragraph-distance}"
+            provisional-label-separation="0pt"
+            provisional-distance-between-starts="{$small-label-distance}"
+            text-align="justify" >
+            <xsl:apply-templates select="xhtml:li" mode="xhtml-handling"/>
+        </fo:list-block>
+    </xsl:template>
+    
+    <!-- xhtml:li -> fo:list-item (bullet label, justified body) -->
+    <xsl:template match="xhtml:li" mode="xhtml-handling">
+        <xsl:variable name="level" as="xs:integer" select="count(ancestor::xhtml:ul)"/>
+        <xsl:variable name="bullet" as="xs:string"
+            select="$xhtml-bullet-symbols[(($level - 1) mod count($xhtml-bullet-symbols)) + 1]"/>
+        
+        <fo:list-item>
+            <fo:list-item-label end-indent="label-end()">
+                <fo:block>
+                    <xsl:value-of select="$bullet"/>
+                </fo:block>
+            </fo:list-item-label>
+            <fo:list-item-body start-indent="body-start()">
+                <fo:block text-align="justify">
+                    <xsl:apply-templates mode="xhtml-handling"/>
+                </fo:block>
+            </fo:list-item-body>
+        </fo:list-item>
+    </xsl:template>
+    
+    <!-- Inline emphasis -->
+    <xsl:template match="xhtml:strong | xhtml:b" mode="xhtml-handling">
+        <fo:inline font-weight="bold">
+            <xsl:apply-templates mode="xhtml-handling"/>
+        </fo:inline>
+    </xsl:template>
+    
+    <xsl:template match="xhtml:em | xhtml:i" mode="xhtml-handling">
+        <fo:inline font-style="italic">
+            <xsl:apply-templates mode="xhtml-handling"/>
+        </fo:inline>
+    </xsl:template>
+
+    <!-- Inline code: monospace, whitespace kept -->
+    <xsl:template match="xhtml:code" mode="xhtml-handling">
+        <fo:inline xsl:use-attribute-sets="Code-Text">
+            <xsl:for-each select="text()">
+                <xsl:sequence select="fx:wrap-math-symbols(
+                    fx:transliterate-roman-numerals(string(.)))"/>
+            </xsl:for-each>
+        </fo:inline>
+    </xsl:template>
+    
+    <!-- Fallback for unknown XHTML elements: keep their text, drop the markup -->
+    <xsl:template match="*" mode="xhtml-handling" priority="-1">
+        <xsl:apply-templates mode="xhtml-handling"/>
+    </xsl:template>
+
     <xsl:template match="node()" mode="missing-or-content" priority="1">
         <xsl:param name="inhalt" as="xs:string?" tunnel="yes"/>
         <xsl:param name="markup" as="xs:boolean" required="no" select="true()"/>
@@ -1357,7 +1480,7 @@
         <!-- This template overloads the stub template in the same mode in 'svrl2any-base.xsl' through its higher priority -->
 
         <xsl:choose>
-            <xsl:when test="string-length($inhalt) = 0">
+            <xsl:when test="string-length(normalize-space($inhalt)) = 0">
                 <xsl:choose>
                     <xsl:when test="$markup">
                         <fo:inline font-style="italic">

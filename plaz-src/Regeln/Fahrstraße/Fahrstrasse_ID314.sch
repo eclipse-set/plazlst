@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="B119F801-E229-4DE5-A248-71F3C6D8D61F" see="Fahrstrasse_ID314" id="ID314" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="B119F801-E229-4DE5-A248-71F3C6D8D61F" id="ID314" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID314">
 	<iso:title>Begrenzung des Fahrwegs einer Rangierstraße (Ziel)</iso:title>
 	<iso:p>
-		<planpro:description>
-			Prüfung, ob ein zu einer Rangierstraße gehörender Fahrweg an den dafür vorgesehenen Signalen endet.
+		<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>		Prüfung, ob ein zu einer Rangierstraße gehörender Fahrweg an den dafür vorgesehenen Signalen endet.
 
-			Wenn Fstr_Zug_Rangier.Fstr_Rangier gefüllt ist, muss Fstr_Zug_Rangier.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Ziel ein Signal
-			mit (Signal.Signal_Real.Signal_Real_Aktiv_Schirm.Signal_Art == "Hauptsignal", "Hauptsperrsignal", "Hauptsperrsignal Ne 14 Ls",
-			"Mehrabschnittssignal", "Mehrabschnittssperrsignal", "Sperrsignal", "Zugdeckungssignal",
-			(Signal (∃ Signal.Signal_Real ∧ ∄ (Signal.Signal_Real.Signal_Real_Aktiv ∧ Signal.Signal_Real.Signal_Real_Aktiv_Schirm) ∧
-			Signal ← Signal_Rahmen.ID_Signal ← Signal_Rahmen ← Signal_Signalbegriff.ID_Signal_Rahmen → Signal_Signalbegriff.Signalbegriff_ID
-			== ("Ne_14" ∨ "Ra_10"))
-			oder Signal.Signal_Fiktiv.Fiktives_Signal_Funktion == "FAP_Ziel", "Rangier_Start_Ziel_ohne_Signal", "Rangier_Start_Ziel_Ne_14"
-			oder "sonstige") sein.
-		</planpro:description>
+		Wenn Fstr_Zug_Rangier.Fstr_Rangier gefüllt ist, muss Fstr_Zug_Rangier.ID_Fstr_Fahrweg → Fstr_Fahrweg.ID_Ziel ein Signal
+		mit (Signal.Signal_Real.Signal_Real_Aktiv_Schirm.Signal_Art == "Hauptsignal", "Hauptsperrsignal", "Hauptsperrsignal Ne 14 Ls",
+		"Mehrabschnittssignal", "Mehrabschnittssperrsignal", "Sperrsignal", "Zugdeckungssignal",
+		(Signal (∃ Signal.Signal_Real ∧ ∄ (Signal.Signal_Real.Signal_Real_Aktiv ∧ Signal.Signal_Real.Signal_Real_Aktiv_Schirm) ∧
+		Signal ← Signal_Rahmen.ID_Signal ← Signal_Rahmen ← Signal_Signalbegriff.ID_Signal_Rahmen → Signal_Signalbegriff.Signalbegriff_ID
+		== ("Ne_14" ∨ "Ra_10"))
+		oder Signal.Signal_Fiktiv.Fiktives_Signal_Funktion == "FAP_Ziel", "Rangier_Start_Ziel_ohne_Signal", "Rangier_Start_Ziel_Ne_14"
+		oder "sonstige") sein.
+</code></pre>
+</planpro:description>
 		<planpro:comment/>
 		<planpro:test>
 			<planpro:success>
@@ -28,7 +28,7 @@
 		</planpro:test>
 		<planpro:output>Fstr_Zug_Rangier</planpro:output>
 	</iso:p>
-  <iso:rule role="warning" context="Fstr_Zug_Rangier[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Fstr_Rangier]">
+  <iso:rule context="Fstr_Zug_Rangier[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Fstr_Rangier]" role="warning">
   	<iso:let name="current_Fahrweg" value="key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)"/>		
   	<iso:let name="Ziel_Signal" value="key('Signal', $current_Fahrweg/ID_Ziel/Wert, /*)"/>	  	
   	

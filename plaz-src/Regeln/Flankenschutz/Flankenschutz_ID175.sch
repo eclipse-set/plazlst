@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="4D835BD4-65A7-4c63-BD63-8AC5DDACFCDA" see="Flankenschutz_ID175" id="ID175" planpro:arbeitspaket="Flankenschutz" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="4D835BD4-65A7-4c63-BD63-8AC5DDACFCDA" id="ID175" planpro:arbeitspaket="Flankenschutz" planpro:version="1.10.0.3" see="Flankenschutz_ID175">
   <iso:title>Zirkelbezug bei Flankenschutz-Weitergabe</iso:title>
   <iso:p>
-    <planpro:description>
-      Bei Weitergabe der Flankenschutzanforderung im rechten/linken Strang darf nicht auf die betrachtete Instanz von Fla_Schutz verwiesen werden.
-      
-      Fla_Schutz.Identitaet muss ≠ Fla_Schutz.Fla_Schutz_Weitergabe.ID_Fla_Weitergabe_R → Fla_Schutz.Identitaet bzw.
-      Fla_Schutz.Fla_Schutz_Weitergabe.ID_Fla_Weitergabe_L → Fla_Schutz.Identitaet sein.
-    </planpro:description>
+    <planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>  Bei Weitergabe der Flankenschutzanforderung im rechten/linken Strang darf nicht auf die betrachtete Instanz von Fla_Schutz verwiesen werden.
+  
+  Fla_Schutz.Identitaet muss ≠ Fla_Schutz.Fla_Schutz_Weitergabe.ID_Fla_Weitergabe_R → Fla_Schutz.Identitaet bzw.
+  Fla_Schutz.Fla_Schutz_Weitergabe.ID_Fla_Weitergabe_L → Fla_Schutz.Identitaet sein.
+</code></pre>
+</planpro:description>
     <planpro:comment/>
     <planpro:test>
       <planpro:success>
@@ -18,7 +18,7 @@
     </planpro:test>
     <planpro:output>Fla_Schutz</planpro:output>
   </iso:p>
-  <iso:rule role="error" context="Fla_Schutz[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]">
+  <iso:rule context="Fla_Schutz[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]" role="error">
     <iso:let name="Fla_Schutz_ID" value="Identitaet/Wert"/>
     <iso:let name="Weitergabe_R" value="if (Fla_Schutz_Weitergabe/ID_Fla_Weitergabe_R[Wert = $Fla_Schutz_ID]) then ('rechten') else ()"/>
     <iso:let name="Weitergabe_L" value="if (Fla_Schutz_Weitergabe/ID_Fla_Weitergabe_L[Wert = $Fla_Schutz_ID]) then ('linken') else ()"/>

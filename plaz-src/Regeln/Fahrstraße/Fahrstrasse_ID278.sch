@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" fpi="E4E85B7D-7FAD-439d-AE05-9A0F79F4BCB3" see="Fahrstrasse_ID278" id="ID278" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" fpi="E4E85B7D-7FAD-439d-AE05-9A0F79F4BCB3" id="ID278" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID278">
 	<iso:title>Definition Vorzugs-DWeg einmalig je Fahrweg</iso:title>
     <iso:p>
-      <planpro:description>
-      	Wird ein Fahrweg als befahrenener Teil von Zugstraßen mit DWeg genutzt, muss in genau einer dieser Zugstraßen
-      	ein Vorzugs-DWeg definiert sein. Die Bedingung gilt auch, wenn nur eine Zugstraße mit DWeg für diesen Fahrweg existiert.
-      	
-      	Bei allen Fstr_Zug_Rangier mit Fstr_Zug_Rangier.Fstr_Zug.Fstr_Zug_DWeg mit 
-      	Fstr_Zug_Rangier.Fstr_Zug.Fstr_Zug_DWeg.ID_Fstr_DWeg → Fstr_DWeg.Fstr_DWeg_Spezifisch und gleichem 
-      	Fstr_Zug_Rangier.ID_Fstr_Fahrweg muss genau einmal Fstr_Zug_Rangier.Fstr_Zug.Fstr_Zug_DWeg.DWeg_Vorzug == "true"
-      	gesetzt sein.
-      </planpro:description>
+      <planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>  	Wird ein Fahrweg als befahrenener Teil von Zugstraßen mit DWeg genutzt, muss in genau einer dieser Zugstraßen
+  	ein Vorzugs-DWeg definiert sein. Die Bedingung gilt auch, wenn nur eine Zugstraße mit DWeg für diesen Fahrweg existiert.
+  	
+  	Bei allen Fstr_Zug_Rangier mit Fstr_Zug_Rangier.Fstr_Zug.Fstr_Zug_DWeg mit 
+  	Fstr_Zug_Rangier.Fstr_Zug.Fstr_Zug_DWeg.ID_Fstr_DWeg → Fstr_DWeg.Fstr_DWeg_Spezifisch und gleichem 
+  	Fstr_Zug_Rangier.ID_Fstr_Fahrweg muss genau einmal Fstr_Zug_Rangier.Fstr_Zug.Fstr_Zug_DWeg.DWeg_Vorzug == "true"
+  	gesetzt sein.
+</code></pre>
+</planpro:description>
       <planpro:comment/>
       <planpro:test>
         <planpro:success>
@@ -23,7 +23,7 @@
       	Fstr_Fahrweg mit Liste zugehöriger Fstr_Zug_Rangier und jeweiligem Wert DWeg_Vorzug [ja/nein]
       </planpro:output>
     </iso:p>
-	<iso:rule role="error" context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-278(current(), parent::*)]">
+	<iso:rule context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-278(current(), parent::*)]" role="error">
 		<iso:let name="Fstr_Zug_Rangier" value="key('Fstr_Zug_Rangier-fuerFstr_Fahrweg', Identitaet/Wert, parent::*)"/>
 		<iso:let name="Fstr_Zug_Rangier_Vorzug" value="$Fstr_Zug_Rangier[Fstr_Zug/Fstr_Zug_DWeg/DWeg_Vorzug/Wert = 'true']"/>
 		<iso:let name="Fstr_Zug_Rangier_keinVorzug" value="$Fstr_Zug_Rangier[not(Fstr_Zug/Fstr_Zug_DWeg/DWeg_Vorzug/Wert = 'true')]"/>

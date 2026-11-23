@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><planpro:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur">
-	<iso:pattern fpi="08CF4686-7E9A-4EE4-95DE-9F428C0469A4" see="Fahrstrasse_ID59" id="ID59-abstract" abstract="true" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3"><iso:title>Ausschluss eines Fahrwegs über beide Schenkel einer Weiche</iso:title><iso:p>
-			<planpro:description>
-				Ein Fahrweg darf nicht über beide Schenkel einer Weiche verlaufen. Somit muss ausgeschlossen werden, 
-				dass ein Fahrweg auf zwei Top-Kanten verweist, die beide den gleichen Top-Knoten referenzieren und
-				dabei einmal die Anschluss-Eigenschaft "links" und einmal die Anschluss-Eigenschaft "rechts" tragen.
-				
-				Wenn für zwei TOP_Kante, auf die mittels Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante verwiesen wird, gilt:
-				TOP_Kante1.ID_TOP_Knoten_A / ..._B == TOP_Kante2.ID_TOP_Knoten_A / ..._B,
-				dann dürfen folgende Fälle nicht auftreten:
-				TOP_Kante1.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "links" und 
-				TOP_Kante2.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "rechts",
-				
-				TOP_Kante1.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "rechts" und 
-				TOP_Kante2.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "links".
-			</planpro:description>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><planpro:pattern xmlns:planpro="http://www.plan-pro.org/regeln/struktur" xmlns:iso="http://purl.oclc.org/dsdl/schematron">
+	<iso:pattern abstract="true" fpi="08CF4686-7E9A-4EE4-95DE-9F428C0469A4" id="ID59-abstract" planpro:arbeitspaket="Fahrstrasse" planpro:version="1.10.0.3" see="Fahrstrasse_ID59"><iso:title>Ausschluss eines Fahrwegs über beide Schenkel einer Weiche</iso:title><iso:p>
+			<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>			Ein Fahrweg darf nicht über beide Schenkel einer Weiche verlaufen. Somit muss ausgeschlossen werden, 
+			dass ein Fahrweg auf zwei Top-Kanten verweist, die beide den gleichen Top-Knoten referenzieren und
+			dabei einmal die Anschluss-Eigenschaft "links" und einmal die Anschluss-Eigenschaft "rechts" tragen.
+			
+			Wenn für zwei TOP_Kante, auf die mittels Fstr_Fahrweg.Bereich_Objekt_Teilbereich.ID_TOP_Kante verwiesen wird, gilt:
+			TOP_Kante1.ID_TOP_Knoten_A / ..._B == TOP_Kante2.ID_TOP_Knoten_A / ..._B,
+			dann dürfen folgende Fälle nicht auftreten:
+			TOP_Kante1.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "links" und 
+			TOP_Kante2.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "rechts",
+			
+			TOP_Kante1.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "rechts" und 
+			TOP_Kante2.TOP_Kante_Allg.TOP_Anschluss_A / ..._B == "links".
+</code></pre>
+</planpro:description>
 			<planpro:comment>
 				Prüfung entfällt, falls
 				- relevante ID_TOP_Kante nil
@@ -32,7 +32,7 @@
 				</planpro:error>
 			</planpro:test>
 			<planpro:output>Fstr_Fahrweg</planpro:output>
-		</iso:p><iso:include href="../incomplete/Fstr_Fahrweg-nil_ID_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-miss_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_ID_TOP_Knoten_A_B.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_TOP_Anschluss_A_B.xml"/><iso:rule role="$Role" context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-59(current(), /*)]">
+		</iso:p><iso:include href="../incomplete/Fstr_Fahrweg-nil_ID_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-miss_TOP_Kante.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_ID_TOP_Knoten_A_B.xml"/><iso:include href="../incomplete/Fstr_Fahrweg-nil_TOP_Anschluss_A_B.xml"/><iso:rule context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Fstr-59(current(), /*)]" role="$Role">
 			<iso:let name="enthaltene_TOP_Kanten" value="key('TOP_Kante', Bereich_Objekt_Teilbereich/ID_TOP_Kante/Wert, /*)/(ID_TOP_Knoten_A|ID_TOP_Knoten_B)"/>		
 			<!--<iso:let name="gemeinsame_TOP_Knoten" value="for $i in $enthaltene_TOP_Kanten
 				return $i[./Wert = subsequence($enthaltene_TOP_Kanten, ./position() + 1)/Wert]"/>-->
@@ -41,6 +41,6 @@
 	  	<iso:report diagnostics="guid typ bereich aufbau s1 s2 s3 s4 s5 s6 s7" test="$gruppierte_Liste_der_Anschlusswerte = ('Rechts:Links', 'Links:Rechts')">Der Fahrweg verläuft über die beiden Schenkel einer Weiche.</iso:report>
 	  </iso:rule></iso:pattern>
 	
-	<iso:pattern is-a="ID59-abstract" id="ID59"><iso:param name="Role" value="error"/></iso:pattern>
+	<iso:pattern id="ID59" is-a="ID59-abstract"><iso:param name="Role" value="error"/></iso:pattern>
 	
 </planpro:pattern>

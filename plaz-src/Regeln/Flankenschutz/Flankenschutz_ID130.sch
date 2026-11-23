@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="CF642B94-B686-4e65-AB86-D6423F91C176" see="Flankenschutz_ID130" id="ID130" planpro:arbeitspaket="Flankenschutz" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="CF642B94-B686-4e65-AB86-D6423F91C176" id="ID130" planpro:arbeitspaket="Flankenschutz" planpro:version="1.10.0.3" see="Flankenschutz_ID130">
   <iso:title>Existenz der Ersatzschutzmaßnahme bei Ersatzschutz</iso:title>
   <iso:p>
-    <planpro:description>
-      Wenn für den Strang einer Zwieschutzweiche "Ersatzschutz" oder "Verschluss_Ersatzschutz" definiert ist, muss auch eine
-      entsprechende Ersatzschutzmaßnahme angegeben sein.
-      
-      Wenn Fla_Zwieschutz.Fla_Zwieschutz_Element.Massnahme_L (bzw. ..._R) == "Ersatzschutz" oder "Verschluss_Ersatzschutz",
-      dann muss der Verweis Fla_Zwieschutz.Fla_Zwieschutz_Element.ID_Fla_Schutz_L (bzw. ..._R) gefüllt sein.
-    </planpro:description>
+    <planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>  Wenn für den Strang einer Zwieschutzweiche "Ersatzschutz" oder "Verschluss_Ersatzschutz" definiert ist, muss auch eine
+  entsprechende Ersatzschutzmaßnahme angegeben sein.
+  
+  Wenn Fla_Zwieschutz.Fla_Zwieschutz_Element.Massnahme_L (bzw. ..._R) == "Ersatzschutz" oder "Verschluss_Ersatzschutz",
+  dann muss der Verweis Fla_Zwieschutz.Fla_Zwieschutz_Element.ID_Fla_Schutz_L (bzw. ..._R) gefüllt sein.
+</code></pre>
+</planpro:description>
     <planpro:comment>
       Prüfung entfällt, falls:
       - relevante Fla_Zwieschutz_Element.Massnahme_L xsi:nil="true"
@@ -25,7 +25,7 @@
     </planpro:test>
     <planpro:output>Fla_Zwieschutz</planpro:output>
   </iso:p>
-  <iso:rule role="error" context="Fla_Zwieschutz[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Fla_Zwieschutz_Element/(Massnahme_L | Massnahme_R)/Wert = ('Ersatzschutz', 'Verschluss_Ersatzschutz')]     [fx:ignore-nil(Fla_Zwieschutz_Element/(Massnahme_L | Massnahme_R))]">
+  <iso:rule context="Fla_Zwieschutz[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Fla_Zwieschutz_Element/(Massnahme_L | Massnahme_R)/Wert = ('Ersatzschutz', 'Verschluss_Ersatzschutz')]     [fx:ignore-nil(Fla_Zwieschutz_Element/(Massnahme_L | Massnahme_R))]" role="error">
     <iso:let name="FlaSchutz_R" value="if (Fla_Zwieschutz_Element[Massnahme_R/Wert = ('Ersatzschutz', 'Verschluss_Ersatzschutz')]                                                                  [not(ID_Fla_Schutz_R)]) then 'rechten' else ()"/>
     <iso:let name="FlaSchutz_L" value="if (Fla_Zwieschutz_Element[Massnahme_L/Wert = ('Ersatzschutz', 'Verschluss_Ersatzschutz')]                                                                  [not(ID_Fla_Schutz_L)]) then 'linken' else ()"/>
     <iso:let name="konjugation" value="if ($FlaSchutz_R and $FlaSchutz_L) then ' und ' else ()"/>

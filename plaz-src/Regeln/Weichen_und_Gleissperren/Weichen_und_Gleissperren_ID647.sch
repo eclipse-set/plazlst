@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="FA29581E-8764-45AC-9548-730AE34B1FBD" see="WEICHEN_UND_GLEISSPERREN_ID647" id="ID647" planpro:arbeitspaket="Weichen_und_Gleissperren" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="FA29581E-8764-45AC-9548-730AE34B1FBD" id="ID647" planpro:arbeitspaket="Weichen_und_Gleissperren" planpro:version="1.10.0.3" see="WEICHEN_UND_GLEISSPERREN_ID647">
 	<iso:title>Auswurfrichtung einer Gsp</iso:title>
 	<iso:p>
-		<planpro:description>
-			Wenn für die Gleissperre eine Auswurfrichtung und (seitliche Lage oder Wirkrichtung) angegeben sind,
-			muss diese Angaben konsistent sein.
+		<planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>		Wenn für die Gleissperre eine Auswurfrichtung und (seitliche Lage oder Wirkrichtung) angegeben sind,
+		muss diese Angaben konsistent sein.
 
-			Wenn W_Kr_Gsp_Komponente.Entgleisungsschuh.Auswurfrichtung ∧ 
-			(W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage ∨ W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung) vorhanden sind,
-			dann muss:
+		Wenn W_Kr_Gsp_Komponente.Entgleisungsschuh.Auswurfrichtung ∧ 
+		(W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage ∨ W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung) vorhanden sind,
+		dann muss:
 
-			Wenn W_Kr_Gsp_Komponente.Entgleisungsschuh.Auswurfrichtung == "rechts", dann muss
-			1. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "rechts" ∧ 
-			   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "in"
-			oder
-			2. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "links" ∧ 
-			   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "gegen"
-			sein.
+		Wenn W_Kr_Gsp_Komponente.Entgleisungsschuh.Auswurfrichtung == "rechts", dann muss
+		1. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "rechts" ∧ 
+		   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "in"
+		oder
+		2. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "links" ∧ 
+		   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "gegen"
+		sein.
 
-			Wenn W_Kr_Gsp_Komponente.Entgleisungsschuh.Auswurfrichtung == "links", dann muss
-			1. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "rechts" ∧ 
-			   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "gegen"
-			oder
-			2. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "links" ∧ 
-			   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "in"
-			sein.
-		</planpro:description>
+		Wenn W_Kr_Gsp_Komponente.Entgleisungsschuh.Auswurfrichtung == "links", dann muss
+		1. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "rechts" ∧ 
+		   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "gegen"
+		oder
+		2. W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Seitliche_Lage == "links" ∧ 
+		   W_Kr_Gsp_Komponente.Punkt_Objekt_TOP_Kante.Wirkrichtung == "in"
+		sein.
+</code></pre>
+</planpro:description>
 		<planpro:comment>
 			Das Attribut "Auswurfrichtung" soll zukünftig entfallen. Aktuell ist die Befüllbarkeit in den Planungswerkzeugen unterschiedlich:
 			Bei Exporten aus ProSig wird die Auswurfrichtung angegeben, Exporte aus ProVI LST enthalten den Parameter nicht.
@@ -43,7 +43,7 @@
 		</planpro:test>
 		<planpro:output>W_Kr_Gsp_Komponente</planpro:output>
 	</iso:p>
-	<iso:rule role="error" context="W_Kr_Gsp_Komponente[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Entgleisungsschuh/Auswurfrichtung][Punkt_Objekt_TOP_Kante/(Seitliche_Lage | Wirkrichtung)]">
+	<iso:rule context="W_Kr_Gsp_Komponente[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][Entgleisungsschuh/Auswurfrichtung][Punkt_Objekt_TOP_Kante/(Seitliche_Lage | Wirkrichtung)]" role="error">
 		<iso:let name="Wirkrichtung" value="Punkt_Objekt_TOP_Kante/Wirkrichtung/Wert"/>
 		<iso:let name="Seitliche_Lage" value="Punkt_Objekt_TOP_Kante/Seitliche_Lage/Wert"/>
 		<iso:let name="Auswurfrichtung" value="Entgleisungsschuh/Auswurfrichtung/Wert"/>

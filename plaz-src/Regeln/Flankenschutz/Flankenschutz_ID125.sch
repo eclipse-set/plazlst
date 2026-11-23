@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="7F9D13EA-AFB7-40da-A314-189F1593856A" see="Flankenschutz_ID125" id="ID125" planpro:arbeitspaket="Flankenschutz" planpro:version="1.10.0.3">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><iso:pattern xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur" fpi="7F9D13EA-AFB7-40da-A314-189F1593856A" id="ID125" planpro:arbeitspaket="Flankenschutz" planpro:version="1.10.0.3" see="Flankenschutz_ID125">
   <iso:title>Flankenschutzdefinition für stellwerksbediente Weichen</iso:title>
   <iso:p>
-    <planpro:description>
-      Für jede stellwerksbediente Weiche im Planungsbereich muss für eine Fahrt über den linken und rechten Strang Flankenschutz geplant sein.
-      
-      Wenn W_Kr_Gsp_Element.Identitaet == Planung_Einzel.LST_Objekte_Planungsbereich.ID_LST_Objekt_Planungsbereich und
-      W_Kr_Gsp_Element.W_Kr_Gsp_Element_Allg.W_Kr_Gsp_Stellart == "elektrisch_ferngestellt" und die Attributgruppe Weiche_Element gefüllt ist,
-      dann müssen eine Instanz Fla_Schutz mit Fla_Schutz.Fla_Schutz_Anforderer.Fahrt_Ueber == "links" sowie eine Instanz 
-      Fla_Schutz mit Fla_Schutz.Fla_Schutz_Anforderer.Fahrt_Ueber == "rechts" mittels 
-      Fla_Schutz.Fla_Schutz_Anforderer.ID_Anforderer_Element auf dieses W_Kr_Gsp_Element verweisen.
-    </planpro:description>
+    <planpro:description format="xhtml"><pre xmlns="http://www.w3.org/1999/xhtml"><code>  Für jede stellwerksbediente Weiche im Planungsbereich muss für eine Fahrt über den linken und rechten Strang Flankenschutz geplant sein.
+  
+  Wenn W_Kr_Gsp_Element.Identitaet == Planung_Einzel.LST_Objekte_Planungsbereich.ID_LST_Objekt_Planungsbereich und
+  W_Kr_Gsp_Element.W_Kr_Gsp_Element_Allg.W_Kr_Gsp_Stellart == "elektrisch_ferngestellt" und die Attributgruppe Weiche_Element gefüllt ist,
+  dann müssen eine Instanz Fla_Schutz mit Fla_Schutz.Fla_Schutz_Anforderer.Fahrt_Ueber == "links" sowie eine Instanz 
+  Fla_Schutz mit Fla_Schutz.Fla_Schutz_Anforderer.Fahrt_Ueber == "rechts" mittels 
+  Fla_Schutz.Fla_Schutz_Anforderer.ID_Anforderer_Element auf dieses W_Kr_Gsp_Element verweisen.
+</code></pre>
+</planpro:description>
     <planpro:comment>
       Prüfung entfällt, falls
       - relevantes W_Kr_Gsp_Element_Allg.W_Kr_Gsp_Stellart xsi:nil="true"
@@ -25,7 +25,7 @@
     </planpro:test>
     <planpro:output>W_Kr_Gsp_Element</planpro:output>
   </iso:p>
-  <iso:rule role="warning" context="W_Kr_Gsp_Element[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][W_Kr_Gsp_Element_Allg/W_Kr_Gsp_Stellart/Wert = 'elektrisch_ferngestellt'][Weiche_Element][key('Planungsbereich', Identitaet/Wert, /*)]     [fx:ignore-nil(key('Fla_Schutz-fuerAnforderer', Identitaet/Wert, parent::*)/Fla_Schutz_Anforderer/Fahrt_Ueber)]">
+  <iso:rule context="W_Kr_Gsp_Element[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][W_Kr_Gsp_Element_Allg/W_Kr_Gsp_Stellart/Wert = 'elektrisch_ferngestellt'][Weiche_Element][key('Planungsbereich', Identitaet/Wert, /*)]     [fx:ignore-nil(key('Fla_Schutz-fuerAnforderer', Identitaet/Wert, parent::*)/Fla_Schutz_Anforderer/Fahrt_Ueber)]" role="warning">
     <!-- [fx:ignore-nil(W_Kr_Gsp_Element_Allg/W_Kr_Gsp_Stellart)] wird nicht im context aufgeführt, da das implizit in der Prüfung auf
     [Wert = 'elektrisch_ferngestellt'] enthalten ist -->
     <!-- zusätzlich wird xsi:nil für Fla_Schutz/Fla_Schutz_Anforderer/Fahrt_Ueber/Wert geprüft -->
