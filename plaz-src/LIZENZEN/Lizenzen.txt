@@ -1,0 +1,34 @@
+--- Pictures folder ---
+© Deutsche Bahn AG · Stand: 23.10.2015 (Version 1.1)
+
+--- font folder ---
+© Deutsche Bahn AG
+
+--- Schematron processing ---
+iso_dsdl_include - LICENSE-schematron.txt (MIT license)
+iso_abstract_expand - LICENSE-schematron.txt (MIT license)
+iso_svrl_for_xslt2 - LICENSE-schematron.txt (MIT license)
+iso_schematron_skeleton_for_saxon - LICENSE-schematron.txt (MIT license)
+
+--- HTML presentation ---
+datatables - LICENSE-datatables.txt (MIT license)
+
+--- datatables extensions ---
+buttons - LICENSE-datatables.txt (MIT license)
+colReorder - LICENSE-datatables.txt (MIT license)
+FixedHeader - LICENSE-datatables.txt (MIT license)
+Scroller - LICENSE-datatables.txt (MIT license)
+Select - LICENSE-datatables.txt (MIT license)
+
+--- font-awesome ---
+font - SIL OFL 1.1.txt
+css - MIT-License.txt (MIT license)
+
+--- other JavaScript libraries ---
+jQuery - MIT-License.txt (MIT license)
+JSZip - LICENSE-JSZip.txt (MIT license)
+pdfmake - LICENSE-pdfmake.txt (MIT license)
+SOL - MIT-License.txt (MIT license)
+
+--- FOP processing ---
+fop-hyph - LICENSE-fop-hyph-de.txt (LPPL license)

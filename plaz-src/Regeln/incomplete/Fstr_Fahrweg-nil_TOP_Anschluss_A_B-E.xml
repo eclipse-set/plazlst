@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron"  xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="error" flag="incomplete" planpro:bezug="TOP_Anschluss_A oder TOP_Anschluss_B in relevanter TOP_Kante nil"
+    context="Fstr_Fahrweg[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [fx:detect-nil(key('TOP_Kante', Bereich_Objekt_Teilbereich/ID_TOP_Kante/Wert, /*)/TOP_Kante_Allg/(TOP_Anschluss_A | TOP_Anschluss_B))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

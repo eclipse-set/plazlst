@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  id="db-planpro-plaz-lst-warning"
+  width="1.0024425cm"
+  height="0.91491407cm"
+  viewBox="0 0 10.024425 9.1491399">
+  <g>
+    <polygon
+      points="10.743,3.101 17.313,14.48 4.171,14.48 -8.97,14.48 -2.397,3.101 4.171,-8.28 "
+      style="fill:none;stroke:#ffa500;stroke-width:2.50643;stroke-linejoin:round;stroke-dasharray:none"
+      transform="matrix(0.34820025,0,0,0.36210831,3.5596947,3.4520117)" />
+    <path
+      d="m 5.0122121,3.478211 c 0,2.3388594 0,2.3388594 0,2.3388594" 
+      style="fill:none;stroke:#ffa500;stroke-width:1.12889;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+      cx="5.0122123"
+      cy="7.2893248"
+      rx="0.60387594"
+      ry="0.63974941"
+      style="clip-rule:evenodd;fill:#ffa500;fill-opacity:1;fill-rule:evenodd;shape-rendering:geometricPrecision" />
+  </g>
+</svg>
