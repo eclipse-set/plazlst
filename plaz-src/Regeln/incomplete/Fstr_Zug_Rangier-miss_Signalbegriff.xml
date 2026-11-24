@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="relevanter Signal_Signalbegriff fehlend"
+    context="Fstr_Zug_Rangier
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [$relevanter-Fahrstrassentyp]
+    [$relevanter-Fahrstrassentyp/(Fstr_Zug_Art | Fstr_Rangier_Art | Fstr_Mittel_Art)[empty($relevante-Fahrstrassenart) or Wert = $relevante-Fahrstrassenart]]
+    [$allow-Gruppenausfahrt or not($relevanter-Fahrstrassentyp/ID_Signal_Gruppenausfahrt)]
+    [key('Signal', key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)/$Signal-Referenz/Wert, /*)
+       /Signal_Real[not(Signal_Real_Aktiv | Signal_Real_Aktiv_Schirm)]]
+    [not(key('Signal_Signalbegriff-fuerSignal_Rahmen', 
+       key('Signal_Rahmen-fuerSignal', 
+          key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)
+          /$Signal-Referenz/Wert, /*)
+        /Identitaet/Wert, /*))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

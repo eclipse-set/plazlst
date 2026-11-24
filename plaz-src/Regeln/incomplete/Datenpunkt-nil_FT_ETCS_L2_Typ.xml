@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="relevanter FT_ETCS_L2_Typ im relevanten Fachtelegramm nil"
+    context="Datenpunkt
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [DP_Typ/DP_Typ_GETCS]
+    [fx:detect-nil(key('Fachtelegramm', DP_Telegramm/ID_Fachtelegramm/Wert, parent::*)/FT_ETCS_L2_Merkmale/FT_ETCS_L2_Typ)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

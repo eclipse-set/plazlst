@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="error" flag="incomplete" planpro:bezug="relevante ID_Markante_Stelle im relevanten Markanter_Punkt nil"
+    context="Datenpunkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Datenpunkt-hasDPTyp(., $DP-Typ)][fx:detect-nil(key('Markanter_Punkt', DP_Typ/DP_Typ_GETCS/ID_DP_Bezug_Funktional/Wert, /*)/ID_Markante_Stelle)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

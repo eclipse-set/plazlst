@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="Fstr_Zug_Art nil"
+    context="Fstr_Zug_Rangier
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [$relevanter-Fahrstrassentyp]
+    [$allow-Gruppenausfahrt or not($relevanter-Fahrstrassentyp/ID_Signal_Gruppenausfahrt)]
+    [fx:detect-nil($relevanter-Fahrstrassentyp/Fstr_Zug_Art)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="error" flag="incomplete" planpro:bezug="relevante TB_Art im Technischen Bereich nil"
+    context="Technischer_Bereich[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:detect-nil(TB_Art)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="fx:ignore-nil(TB_Art)"/>
+</iso:rule>

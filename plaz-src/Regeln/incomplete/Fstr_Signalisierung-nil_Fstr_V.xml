@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="relevantes Fstr_V (in Fstr_Zug_Rangier) nil"
+    context="Fstr_Signalisierung
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [key('Signal_Signalbegriff', ID_Signal_Signalbegriff/Wert, /*)
+    /substring-after(Signalbegriff_ID/@xsi:type,':') = $Signalbegriff]
+    [fx:detect-nil(key('Fstr_Zug_Rangier', ID_Fstr_Zug_Rangier/Wert, parent::*)/*/Fstr_V)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="error" flag="incomplete" planpro:bezug="relevanter Signal_Signalbegriff fehlend"
+    context="Datenpunkt[../(parent::LST_Zustand_Ziel | parent::LST_Zustand)][fx:Datenpunkt-hasDPTyp(., $DP-Typ)]
+    [not(key('Signal_Signalbegriff-fuerSignal_Rahmen', 
+        key('Signal_Rahmen-fuerSignal', 
+            key('Markanter_Punkt', DP_Typ/DP_Typ_GETCS/ID_DP_Bezug_Funktional/Wert, /*)
+            /ID_Markante_Stelle/Wert, /*)
+        /Identitaet/Wert, /*))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

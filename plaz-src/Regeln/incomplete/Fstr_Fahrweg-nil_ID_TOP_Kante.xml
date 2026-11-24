@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron"  xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="relevante ID_TOP_Kante (in Fstr_Fahrweg.Bereich_Objekt_Teilbereich) nil"
+    context="Fstr_Fahrweg
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [fx:detect-nil(Bereich_Objekt_Teilbereich/ID_TOP_Kante)]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>
