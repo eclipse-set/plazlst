@@ -38,6 +38,7 @@ jobs:
         run: mvn -T1.5C -B clean verify
 
       - name: Publish project
+        if: github.ref == 'refs/heads/main'
         run: mvn deploy -B -DaltDeploymentRepository=set-github::https://maven.pkg.github.com/${{ github.repository }}
 
       - name: Trigger Build SET
