@@ -1,0 +1,16 @@
+name: Update DEPENDENCIES
+
+on: 
+  push:
+    branches:
+      - main
+      - release/*
+    paths-ignore:
+      - DEPENDENCIES
+
+jobs:
+  dependencies:
+    uses: eclipse-set/build/.github/workflows/update-dependencies.yml@main
+    secrets: inherit
+    with:
+      pom: "pom.xml"
