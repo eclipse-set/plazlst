@@ -51,6 +51,9 @@ THE SOFTWARE.
 
 <!--
 VERSION INFORMATION
+  2026-09-21 SW
+     * Allow macro expansion in @role attribute, eg. for sch:rule/@role
+  
   2023-08-28 SW
      * Allow macro expansion in @value attributes, eg. for sch:let/@value
 
@@ -255,7 +258,7 @@ VERSION INFORMATION
 	<xslt:template mode="iae:do-pattern" match="*">
 		<xslt:param name="caller"/>
 		<xslt:copy>
-			<xslt:for-each select="@*[name()='test' or name()='context' or name()='select'   or name()='path'  or name()='value']">
+			<xslt:for-each select="@*[name()='test' or name()='context' or name()='select'   or name()='path'  or name()='value' or name()='role']">
 				<xslt:attribute name="{name()}">
 				<xslt:call-template name="iae:macro-expand">
 						<xslt:with-param name="text"><xslt:value-of select="."/></xslt:with-param>
@@ -263,7 +266,7 @@ VERSION INFORMATION
 					</xslt:call-template>
 				</xslt:attribute>
 			</xslt:for-each>	
-			<xslt:copy-of select="@*[name()!='test'][name()!='context'][name()!='select'][name()!='path'][name()!='value']" />
+			<xslt:copy-of select="@*[name()!='test'][name()!='context'][name()!='select'][name()!='path'][name()!='value'][name()!='role']" />
 			<xsl:for-each select="node()">
 				<xsl:choose>
 				    <!-- Experiment: replace macros in text as well, to allow parameterized assertions

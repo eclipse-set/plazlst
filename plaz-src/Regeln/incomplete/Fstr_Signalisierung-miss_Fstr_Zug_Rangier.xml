@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="referenzierte Fstr_Zug_Rangier fehlend"
+    context="Fstr_Signalisierung
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [key('Signal_Signalbegriff', ID_Signal_Signalbegriff/Wert, /*)
+    /substring-after(Signalbegriff_ID/@xsi:type,':') = $relevanter-Signalbegriff]
+    [not(key('Fstr_Zug_Rangier', ID_Fstr_Zug_Rangier/Wert, parent::*))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

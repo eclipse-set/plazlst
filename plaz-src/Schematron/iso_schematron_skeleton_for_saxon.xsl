@@ -202,6 +202,12 @@ THE SOFTWARE.
 --> 
 <!--
   VERSION INFORMATION
+     2026-09-02
+        * SW Prevent warnings about missing parameters for called templates
+          (process-title, process-schema-title, process-p)
+     2026-03-24
+        * SW (Susanne Wunsch, TU Dresden, Germany)
+          process flag attribute in rule elements and pass it into the SVRL output
      2010-04-14
      	* RJ Reorder call-template in exslt case only, report by BD
         * Add command line parameter 'terminate' which will terminate on first failed 
@@ -1689,7 +1695,9 @@ which require a preprocess.
  
 	
 	<xsl:template match="iso:title" >
-	     <xsl:call-template name="process-title" />
+	     <xsl:call-template name="process-title">
+	     	<xsl:with-param name="class" select="''"/>
+	     </xsl:call-template>
 	</xsl:template>
  
 
@@ -2128,11 +2136,13 @@ which require a preprocess.
 		<xsl:param name="class" />
 	   <xsl:call-template name="process-p">
 	      <xsl:with-param  name="class">title</xsl:with-param>
+	      <xsl:with-param  name="icon" select="''" />
+	      <xsl:with-param  name="id" select="''" />
+	      <xsl:with-param  name="lang" select="''" />
 	   </xsl:call-template>
 	</xsl:template>
 		
 	<xsl:template name="process-schema-title" >
-		<xsl:param name="class" />
 	   <xsl:call-template name="process-title">
 	      <xsl:with-param  name="class">schema-title</xsl:with-param>
 	   </xsl:call-template>

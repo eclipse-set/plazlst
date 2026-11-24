@@ -29,7 +29,11 @@
   validate with schemas from either namespace.
   
 
-  History: 
+  History:
+    2026-03-26 SW
+       * more robust retrieval of document-uri achieved with base-uri in case of empty string
+    2026-03-24 SW
+        * process flag attribute in rule elements and pass it into the SVRL output
     2015-11-24 SW (Susanne Wunsch, TU Dresden, Germany)
        * Forward foreign attributes into SVRL
    	2010-07-10

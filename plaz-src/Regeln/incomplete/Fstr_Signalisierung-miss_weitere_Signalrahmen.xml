@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron" xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+  role="$Role" flag="incomplete" planpro:bezug="relevanter Signal_Rahmen einer relevanten Signalisierung fehlend"
+    context="Fstr_Signalisierung
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [key('Signal_Signalbegriff', ID_Signal_Signalbegriff/Wert, /*)
+    /substring-after(Signalbegriff_ID/@xsi:type,':') = $relevanter-Signalbegriff]
+    [some $i in (key('Fstr_Signalisierung-fuerFstr_Zug_Rangier', ID_Fstr_Zug_Rangier/Wert, parent::*)
+    except .)/ID_Signal_Signalbegriff satisfies 
+      not(key('Signal_Rahmen', 
+        key('Signal_Signalbegriff', $i/Wert, /*)
+      /ID_Signal_Rahmen/Wert, /*))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>

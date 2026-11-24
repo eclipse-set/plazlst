@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iso:rule xmlns:iso="http://purl.oclc.org/dsdl/schematron"  xmlns:planpro="http://www.plan-pro.org/regeln/struktur"
+    role="$Role" flag="incomplete" planpro:bezug="referenziertes Signal fehlend"
+    context="Fstr_DWeg
+    [../(parent::LST_Zustand_Ziel | parent::LST_Zustand)]
+    [not(key('Signal', 
+      key('Fstr_Fahrweg', ID_Fstr_Fahrweg/Wert, parent::*)
+      /$Signal-Referenz/Wert, /*))]">
+    <iso:assert  diagnostics="guid typ bereich"
+        test="false()"/>
+</iso:rule>
